@@ -1,7 +1,355 @@
 @charset "utf-8";
 
 /**
- * css样式重置
- * 为了使样式统一
+ * 公共样式
  */
 
+// 变量
+$color:#00a78e #fff #1b242f #c7c7c7 #666666 #f4f4f4 #171717; // 主题色 字体白色 字体深黑黑 字体偏灰 字体偏黑 背景灰
+$xcolor:#8C8989 #ccc #d4d4d4; // 分割线上下  左右 边框
+$fcolor:#44c7f4 #eb5424 #bb1e10 #237f52 #fdbd10; // 工作 学徒 实习 暑假工 学校
+$font:16px; // html设置字体大小
+
+/**
+ * 动画
+ */
+@mixin animation($n:move,$do:2s,$fn:linear,$d:0,$it:1,$di:normal) {
+    animation: {
+        name: $n; // 动画名字
+        duration: $do; // 完成动画所花费的时间，以秒或毫秒计
+        timing-function: $fn; // 动画速度曲线
+        delay: $d; // 开始前的延迟
+        iteration-count: $it; // 动画播放次数
+        direction: $di; // 是否反向播放
+      }
+      -webkit-animation: {
+        name: $n; // 动画名字
+        duration: $do; // 完成动画所花费的时间，以秒或毫秒计
+        timing-function: $fn; // 动画速度曲线
+        delay: $d; // 开始前的延迟
+        iteration-count: $it; // 动画播放次数 infinite 无线次数
+        direction: $di; // 是否反向播放 alternate 反向
+      }
+}
+
+html,body {
+  font-size: $font;
+  width: 100%;
+  height: 100%;
+}
+
+/**
+ * 引入字体图标
+ */
+
+@font-face {
+  font-family: 'iconfont';
+  src: url('../font/iconfont.eot');
+  src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('../font/iconfont.woff') format('woff'),
+  url('../font/iconfont.ttf') format('truetype'),
+  url('../font/iconfont.svg#iconfont') format('svg');
+}
+
+[class^="icon_"],
+[class*=" icon_"] {
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * 测试部分
+ */
+
+main{
+  width: 100%;
+  height: 400px;
+  background-color: nth($color,3);
+}
+
+main:nth-of-type(2n) {
+  background-color: nth($color,1);
+}
+
+/**
+ * 导航栏
+ */
+header {
+  width: 100%;
+  height: 88px;
+  background-color: nth($color, 7);
+  position: fixed;
+
+  nav {
+    width: 1140px;
+    // width: 90%;
+    margin: 0 auto;
+
+    .nav_log {
+      // box-sizing: border-box;
+      //padding: 19px 0;
+    }
+
+    .nav_log li:first-of-type {
+      width: 50px;
+      height: 50px;
+      box-sizing: border-box;
+      margin: 19px 0;
+      border: 4px solid nth($color, 1);
+      position: relative;
+      display: inline-block;
+
+    }
+
+    .nav_log li:first-of-type::after {
+      content: 'M';
+      color: nth($color, 2);
+      font: {
+        size: 36px;
+        weight: bold;
+      }
+      position: absolute;
+      left: 3.8px;
+      top: -6px;
+    }
+
+    .nav_log li:last-of-type {
+      padding: 28px 0 0 8px;
+      color: nth($color, 2);
+      letter-spacing: 2px;
+      font: {
+        size: 24px;
+        weight: 550;
+      }
+    }
+
+    ul li {
+      //line-height: 88px;
+      padding: {
+        top: 34px;
+      }
+      float: left;
+    }
+
+    .nav_r li {
+      letter-spacing: 2px;
+      display: inline-block;
+      text-align: center;
+      padding: {
+        left: 26px;
+      }
+
+      a {
+        color: nth($color, 2);
+        position: relative;
+        display: inline-block;
+      }
+
+      .current {
+        color: nth($color, 1);
+      }
+
+      a::after {
+        content: attr(data-hover);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        transition: 2s;
+        color: nth($color, 1);
+        border: {
+          bottom: 3px solid nth($color, 1);
+        }
+        padding: {
+          bottom: 2px;
+        }
+        width: 0;
+        overflow: hidden;
+        text-align: left;
+        white-space: nowrap;
+
+      }
+
+      a:hover::after {
+        width: 100%;
+      }
+    }
+
+    .nav_r li:last-of-type {
+      margin: {
+        top: 33px;
+      }
+
+      transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+
+      padding: {
+        left: 0;
+        right: 26px;
+      }
+
+      .play span {
+        float: left;
+        width: 3px;
+        margin-left: 3px;
+        background-color: nth($color, 1);
+        display: none;
+      }
+
+      .stop li {
+        float: left;
+        width: 3px;
+        background-color: nth($color, 1);
+        padding: 0;
+        margin: 0;
+        margin-left: 3px;
+        // display: none;
+      }
+
+      .stop li:nth-of-type(4) {
+        height: 8px;
+      }
+
+      .stop li:nth-of-type(3) {
+        height: 16px;
+      }
+
+      .stop li:nth-of-type(2) {
+        height: 10px;
+      }
+
+      .stop li:nth-of-type(1) {
+        height: 22px;
+      }
+    }
+
+    .nav_r li:last-of-type .play span:nth-of-type(1) {
+      height: 8px;
+      @include animation($n:move1,$do:1.5s,$d:1.1s,$it:infinite,$di:alternate);
+    }
+
+    .nav_r li:last-of-type .play span:nth-of-type(2) {
+      height: 16px;
+      @include animation($n:move2,$do:1.1s,$d:0,$it:infinite,$di:alternate);
+    }
+
+    .nav_r li:last-of-type .play span:nth-of-type(3) {
+      height: 10px;
+      @include animation($n:move3,$do:1.25s,$d:0,$it:infinite,$di:alternate);
+    }
+
+    .nav_r li:last-of-type .play span:nth-of-type(4) {
+      height: 22px;
+      @include animation($n:move4,$do:1s,$d:0,$it:infinite,$di:alternate);
+    }
+  }
+}
+
+// 音乐动画条
+@keyframes move1 {
+    0% {
+      height: 8px;
+    }
+    25% {
+      height: 22px;
+    }
+    100% {
+      height: 1px;
+    }
+}
+@-webkit-keyframes move1 {
+    0% {
+      height: 8px;
+    }
+    25% {
+      height: 22px;
+    }
+    100% {
+      height: 1px;
+    }
+}
+
+@keyframes move2 {
+    0% {
+      height: 16px;
+    }
+    50% {
+      height: 22px;
+    }
+    100% {
+      height: 1px;
+    }
+}
+@-webkit-keyframes move2 {
+    0% {
+      height: 16px;
+    }
+    25% {
+      height: 22px;
+    }
+    100% {
+      height: 1px;
+    }
+}
+
+@keyframes move3 {
+    0% {
+      height: 10px;
+    }
+    50% {
+      height: 22px;
+    }
+    100% {
+      height: 1px;
+    }
+}
+@-webkit-keyframes move3 {
+    0% {
+      height: 10px;
+    }
+    25% {
+      height: 22px;
+    }
+    100% {
+      height: 1px;
+    }
+}
+
+@keyframes move4 {
+    0% {
+      height: 22px;
+    }
+    100% {
+      height: 1px;
+    }
+}
+@-webkit-keyframes move4 {
+    0% {
+      height: 22px;
+    }
+    25% {
+      height: 22px;
+    }
+    100% {
+      height: 1px;
+    }
+}
+
+/**
+ * 回到顶部
+ */
+.icon_top {
+  font: {
+    size: 50px;
+  }
+
+  color: nth($color, 1);
+
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}

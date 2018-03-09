@@ -11,6 +11,7 @@
  * 4. html压缩
  * 5. ico
  * 6. font
+ * 7. 音乐
  * 7. server服务
  */
 
@@ -47,6 +48,12 @@ gulp.task('script', () => {
       stream: true
     }));
 });
+
+/*// 先后顺序
+gulp.task('scripts', function() {
+  gulp.src(['a.js', 'b.js', 'c.js'])
+    .pipe(concat('main.js'))
+});*/
 
 
 // 3. 图片复制 压缩
@@ -99,6 +106,15 @@ gulp.task('font', () => {
     }));
 });
 
+// music
+gulp.task('music', () => {
+  return gulp.src('./src/music/*.*')
+    .pipe(gulp.dest('./dist/music'))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
+});
+
 // 服务
 const browserSync = require('browser-sync'); // 服务
 
@@ -117,5 +133,6 @@ gulp.task('server', () => {
   gulp.watch('./src/*.html', ['html']);
   gulp.watch('./src/*.ico', ['ico']);
   gulp.watch('./src/font/*.*', ['font']);
+  gulp.watch('./src/music/*.*', ['music']);
 });
 

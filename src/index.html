@@ -2,15 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MKIMQ</title>
+  <title>ManKeung</title>
   <meta name="author" content="Mankeung">
   <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
   <link rel="icon" href="./icon.ico" type="x-icon">
   <link rel="shortcut icon" href="./icon.ico" type="x-icon">
-  <link rel="stylesheet" href="引入css" type="text/css">
+  <link rel="stylesheet" href="./styles/reset.css" type="text/css">
+  <link rel="stylesheet" href="./styles/common.css" type="text/css">
+  <link rel="stylesheet" href="./styles/pad.css" type="text/css" media="(min-width:768px)">
+  <link rel="stylesheet" href="./styles/pc.css" type="text/css" media="(min-width:1180px)">
+  <!-- <link rel="stylesheet" href="./styles/pc-w.css" type="text/css" media="(min-width:1200px)"> -->
   <script src="./scripts/min.js"></script>
 </head>
 <body>
+  <!-- 导航栏 start -->
+  <header>
+    <nav class="clearfix">
+      <!-- log -->
+      <ul class="nav_log fl">
+        <li></li>
+        <li>ANKEUNG</li>
+      </ul>
+      <!-- 手机端 按钮 -->
+      <ul></ul>
+      <!-- 切换栏 -->
+      <ul class="nav_r fr clearfix">
+        <li><a data-hover="首页" href="#home" class="current">首页</a></li>
+        <li><a data-hover="关于" href="#about">关于</a></li>
+        <li><a data-hover="技能" href="#skill">技能</a></li>
+        <li><a data-hover="经历" href="#exp">经历</a></li>
+        <li><a data-hover="作品" href="#works">作品</a></li>
+        <li><a data-hover="项目介绍" href="#project">项目介绍</a></li>
+        <li><a data-hover="联系我" href="#contact">联系我</a></li>
+        <li>
+          <ul class="play clearfix">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </ul>
+          <ul class="stop clearfix">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <!-- 导航 end -->
 
+  <!-- 音乐 start -->
+  <audio autoplay="autoplay" loop="loop" id="music">
+    <!-- <source src="song.ogg" type="audio/ogg"> -->
+    <source src="./music/music.mp3" type="audio/mpeg">
+  </audio>
+  <!-- 音乐 end -->
+
+  <!-- 回到顶部 start -->
+  <span class="icon_top">&#xe607;</span>
+  <!-- 回到顶部 end -->
+
+  <!-- 头部名片 start -->
+  <main id="home"></main>
+  <!-- 头部名片 end -->
+
+  <!-- 关于 start -->
+  <main id="about"></main>
+  <!-- 关于 end -->
+
+  <!-- 技能 start -->
+  <main id="skill"></main>
+  <!-- 技能 end -->
+
+  <!-- 经历 start -->
+  <main id="exp"></main>
+  <!-- 经历 end -->
+
+  <!-- 作品 start -->
+  <main id="works"></main>
+  <!-- 作品 end -->
+
+  <!-- 项目介绍 start -->
+  <main id="project"></main>
+  <!-- 项目介绍 end -->
+
+  <!-- 联系我 start -->
+  <main id="contact"></main>
+  <!-- 联系我 end -->
+
+  <!-- 版权 start -->
+  <footer></footer>
+  <!-- 版权 end -->
 </body>
 </html>

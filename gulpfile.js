@@ -36,7 +36,7 @@ const babel = require('gulp-babel'); // ES6转ES5
 const concat = require('gulp-concat'); // 合并
 const uglify = require('gulp-uglify'); // 压缩
 
-gulp.task('script', () => {
+/*gulp.task('script', () => {
   return gulp.src('./src/scripts/*.js')
     .pipe(babel({
       presets: ['env']
@@ -47,14 +47,20 @@ gulp.task('script', () => {
     .pipe(browserSync.reload({
       stream: true
     }));
-});
-
-/*// 先后顺序
-gulp.task('scripts', function() {
-  gulp.src(['a.js', 'b.js', 'c.js'])
-    .pipe(concat('main.js'))
 });*/
 
+gulp.task('script', () => {
+  return gulp.src(['./src/scripts/main.js', './src/scripts/animate.js', './src/scripts/ajax.js', './src/scripts/own.js'])
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat('min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist/scripts'))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
+});
 
 // 3. 图片复制 压缩
 const imagemin = require('gulp-imagemin');

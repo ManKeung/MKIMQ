@@ -4,6 +4,7 @@
 
 'use strict';
 
+// 随机排序
 function randomSort(arr, newArr) {
   // 如果原数组arr的length值等于1时，原数组只有一个值，其键值为0
   // 同时将这个值push到新数组newArr
@@ -25,10 +26,14 @@ function randomSort(arr, newArr) {
 
 // 测试
 
-/*var arr = [1,2,3,4,5,6,7,8,9,10];
-var newArr = [];
+//var arr = [1,2,3,4,5,6,7,8,9,10];
+// var arr = [{a:1},{b:2},{c:3},{d:4},{f:6}];
+// var newArr = [];
 
-randomSort(arr, newArr);
-console.log(newArr);*/
+// randomSort(arr, newArr);
+// console.log(newArr);
 /**********************************************************/
 
+// 排序
+// var arr = [3,2,1,10,0];
+// console.log(arr.sort((a,b)=>a-b));

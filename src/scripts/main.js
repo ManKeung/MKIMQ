@@ -26,6 +26,16 @@ function un(obj, type, fn) {
   }
 }
 
+// 隐藏
+function hide(obj) {
+  css(obj, 'display', 'none');
+}
+
+// 显示
+function show(obj) {
+  css(obj, 'display', 'block');
+}
+
 /**********************************************************/
 
 // 事件
@@ -107,7 +117,7 @@ function $all(sel) { // 选择的是集合
 
 function $(sel) { // 选择单个
 
-  return document.querySelector(ser);
+  return document.querySelector(sel);
 }
 /**********************************************************/
 
@@ -198,7 +208,7 @@ function removeClass(obj, name) {
   }
 
   function removeName(obj) {
-    dom.className = obj.className.replace(name, '');
+    obj.className = obj.className.replace(name, '');
   }
 }
 
@@ -344,8 +354,8 @@ function scroll() {
   if(window.pageYOffset != null) { // ie9+ 和其他浏览器
 
     return {
-      top: window.pageXOffset,
-      left: window.pageYOffset
+      top: window.pageYOffset,
+      left: window.pageXOffset
     }
   }else if(document.compatMode == 'CSS1Compat') { // 声明的了 DTD
     // 检测是不是怪异模式的浏览器 -- 就是没有 声明<!DOCTYPE html>
@@ -394,26 +404,26 @@ function client() {
         }
     }
 
-function client() {
-  if(window.innerWidth != null) { // ie9+ 最新浏览器
+// function client() {
+//   if(window.innerWidth != null) { // ie9+ 最新浏览器
 
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight
-    }
-  }else if(document.compatMode === 'CSS1Compat') { // 标准浏览器
+//     return {
+//       width: window.innerWidth,
+//       height: window.innerHeight
+//     }
+//   }else if(document.compatMode === 'CSS1Compat') { // 标准浏览器
 
-    return {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight
-    }
-  }
+//     return {
+//       width: document.documentElement.clientWidth,
+//       height: document.documentElement.clientHeight
+//     }
+//   }
 
-  return { // 怪异浏览器
-    width: document.body.clientWidth,
-    height: document.body.clientHeight
-  }
-}
+//   return { // 怪异浏览器
+//     width: document.body.clientWidth,
+//     height: document.body.clientHeight
+//   }
+// }
 /**********************************************************/
 
 // DOM操作

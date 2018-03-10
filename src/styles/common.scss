@@ -66,7 +66,7 @@ html,body {
 
 main{
   width: 100%;
-  height: 400px;
+  height: 900px;
   background-color: nth($color,3);
 }
 
@@ -80,13 +80,14 @@ main:nth-of-type(2n) {
 header {
   width: 100%;
   height: 88px;
-  background-color: nth($color, 7);
+  background-color:   rgba(23, 23, 23, 0);
   position: fixed;
 
   nav {
     width: 1140px;
     // width: 90%;
     margin: 0 auto;
+    // border: 1px solid red;
 
     .nav_log {
       // box-sizing: border-box;
@@ -148,10 +149,6 @@ header {
         display: inline-block;
       }
 
-      .current {
-        color: nth($color, 1);
-      }
-
       a::after {
         content: attr(data-hover);
         height: 100%;
@@ -179,6 +176,10 @@ header {
       }
     }
 
+    .nav_r .current a {
+      color: nth($color, 1);
+    }
+
     .nav_r li:last-of-type {
       margin: {
         top: 33px;
@@ -197,7 +198,7 @@ header {
         width: 3px;
         margin-left: 3px;
         background-color: nth($color, 1);
-        display: none;
+        // display: none;
       }
 
       .stop li {
@@ -208,6 +209,14 @@ header {
         margin: 0;
         margin-left: 3px;
         // display: none;
+      }
+
+      .paly {
+        display: block;
+      }
+
+      .stop {
+        display: none;
       }
 
       .stop li:nth-of-type(4) {
@@ -225,6 +234,10 @@ header {
       .stop li:nth-of-type(1) {
         height: 22px;
       }
+    }
+
+    .nav_r li:last-of-type:hover {
+      cursor: pointer;
     }
 
     .nav_r li:last-of-type .play span:nth-of-type(1) {
@@ -352,4 +365,9 @@ header {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  display: none;
+}
+
+.icon_top:hover {
+  cursor: pointer;
 }

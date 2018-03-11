@@ -14,6 +14,7 @@ header {
   nav {
     width: 1140px;
     margin: 0 auto;
+    // border: 1px solid red;
 
     .phone {
       display: none;
@@ -64,3 +65,74 @@ header {
   }
 }
 
+/**
+ * 常用样式
+ */
+
+.center {
+  width: 1140px;
+  margin: 0 auto;
+  padding: 40px;
+  // border: 1px solid red;
+}
+
+/**
+ * 个人名片
+ */
+#home {
+  padding: {
+    top: 128px;
+    bottom: 40px;
+  }
+
+  background: {
+    image: url(../images/pc/bigbg.png);
+    repeat: no-repeat;
+    size: 100% 100%;
+  }
+
+  div {
+
+    ul:first-of-type {
+      width: 50%;
+      padding-right: 20px;
+
+      dl:last-of-type {
+        padding-top: 10px;
+
+        dd {
+          line-height: 40px;
+
+          strong {
+            display: inline-block;
+            width: 100px;
+
+            font: {
+              weight: bold;
+              size: 16px;
+            }
+
+            letter-spacing: 2px;
+          }
+        }
+      }
+    }
+
+    ul:last-of-type {
+      // background-color: red;
+      width: 50%;
+      // height: 100px;
+
+      li {
+        width: 80%;
+        height: 348px;
+        background: {
+          image: url(../images/pc/me.png);
+          size: cover;
+          repeat: no-repeat;
+          position: 21px -75px;
+        }
+      }
+    }
+  }
+}

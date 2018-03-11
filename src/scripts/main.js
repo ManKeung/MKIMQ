@@ -454,3 +454,24 @@ function html(obj, value) {
   }
 }
 /**********************************************************/
+
+// 移动端判定
+function isMobile() {
+  var suserAgent = navigator.userAgent.toLowerCase();
+  var bIsIpad = suserAgent.match(/ipad/i) == 'ipad';
+  var bIsIphoneOs = suserAgent.match(/iphone os/i) == 'iphone os';
+  var bIsMidp = suserAgent.match(/midp/i) == 'midp';
+  var bIsUc7 = suserAgent.match(/rv:1.2.3.4/i) == 'rv:1.2.3.4';
+  var bIsUc = suserAgent.match(/ucweb/i) == 'ucweb';
+  var bIsAndroid = suserAgent.match(/android/i) == 'android';
+  var bIsCE = suserAgent.match(/window ce/i) == 'window ce';
+  var bIsWM = suserAgent.match(/window mobile/i) == 'window mobile';
+
+  if(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+
+    return true;
+  }else {
+
+    return false;
+  }
+}

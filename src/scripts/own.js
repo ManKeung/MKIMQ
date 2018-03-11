@@ -185,11 +185,13 @@
   // console.log('有几个孩子'+navrli.length);
   for(var i=0, len=navrli.length-1; i<len; i++) {
     // console.log('ok');
-    on(navrli[i], 'click', () => {
-      // console.log(i);
-      animate1(navr, target, 0);
-      flag = true;
-    });
+    if(isMobile()) {
+       on(navrli[i], 'click', () => {
+       // console.log(i);
+       animate1(navr, target, 0);
+       flag = true;
+      });
+    }
   }
 
   function animate(obj, current, target) {
@@ -200,7 +202,7 @@
       current =current + (target - current) / 10;
       current = current > 0 ? Math.ceil(current) : Math.floor(current);
       obj.style.height = current+'px';
-      console.log(current, target);
+      // console.log(current, target);
 
       if(current == target) {
         clearInterval(timer);

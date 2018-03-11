@@ -132,7 +132,7 @@
   // console.log('roll = ' + roll.length, ' main = ' + main.length);
   let leader1 = 0,target1 = 0,timer1 = null;
 
-  for(let i = 0,len = roll.length; i < len; i++) { // 滚动划屏
+  for(var i = 0,len = roll.length; i < len; i++) { // 滚动划屏
     roll[i].index = i;
 
     on(roll[i], 'click', function(e) {
@@ -146,7 +146,7 @@
         if(Math.round(Math.abs(leader1)) == Math.floor(Math.abs(target1))) {
           clearInterval(timer1);
         }
-      }, 30);
+      }, 60);
 
       for(var i = 0, len = roll.length; i < len; i++) { // 导航栏 加class
         // removeClass(roll[i], 'current');
@@ -155,5 +155,72 @@
 
       addClass(roll[this.index], 'current');
     });
+  }
+}
+
+/**
+ * 导航栏手机端菜单栏
+ */
+{
+  let phone = $('.phone');
+  let navr = $('.nav_r');
+  // console.log(offset(navrli[0]).height);
+  let target = 44*7+20;
+  let flag = true; // 开关
+  let navrHeight = offset(navr).height;
+
+  on(phone, 'click', () => {
+    if(flag) {
+      addClass(navr, 'nav_r_add');
+      animate(navr, 0, target)
+      flag = false;
+    }else {
+      animate1(navr, target, 0);
+      // removeClass(navr, 'nav_r_add');
+      flag = true;
+    }
+  });
+
+  let navrli = navr.children;
+  // console.log('有几个孩子'+navrli.length);
+  for(var i=0, len=navrli.length-1; i<len; i++) {
+    // console.log('ok');
+    on(navrli[i], 'click', () => {
+      // console.log(i);
+      animate1(navr, target, 0);
+      flag = true;
+    });
+  }
+
+  function animate(obj, current, target) {
+    let timer = null;
+    clearInterval(timer);
+
+    timer = setInterval(() => {
+      current =current + (target - current) / 10;
+      current = current > 0 ? Math.ceil(current) : Math.floor(current);
+      obj.style.height = current+'px';
+      console.log(current, target);
+
+      if(current == target) {
+        clearInterval(timer);
+      }
+    }, 30);
+  }
+
+  function animate1(obj, current, target) {
+    let timer = null;
+    clearInterval(timer);
+
+    timer = setInterval(() => {
+      current =current + (target - current) / 10;
+      current = current > 0 ? Math.ceil(current) : Math.floor(current);
+      obj.style.height = current-9+'px';
+      // console.log(current, target);
+
+      if(current-9 == target) {
+        clearInterval(timer);
+      }
+    }, 30);
   }
 }

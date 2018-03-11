@@ -1,0 +1,100 @@
+@charset "utf-8";
+
+/**
+ * phone样式
+ */
+
+/**
+ * 导航
+ */
+
+header {
+  height: 60px;
+  // padding: 0 40px 0 10px;
+  nav {
+    width: 96%;
+    margin: 0 auto;
+
+    .phone {
+      display: block;
+    }
+
+    .nav_r {
+      display: none;
+      // display: block;
+      // border: 1px solid red;
+    }
+
+    .nav_log li:first-of-type {
+      width: 40px;
+      height: 40px;
+      margin: 10px 0;
+      border: {
+        width: 3.5px;
+      }
+    }
+
+    .nav_log li:first-of-type::after {
+      font: {
+        size: 28px;
+      }
+      left: 4px;
+      top: -3px;
+    }
+
+    .nav_log li:last-of-type {
+      padding: 18px 0 0 4px;
+      letter-spacing: 2px;
+      font: {
+        size: 20px;
+        weight: 700;
+      }
+    }
+
+    ul li {
+      padding: {
+        top: 34px;
+      }
+    }
+
+    .nav_r li {
+      letter-spacing: 2px;
+      padding: {
+        left: 26px;
+      }
+    }
+
+    .nav_r_add {
+      display: block;
+      // height: 0;
+      position: absolute;
+      width: 96%;
+      top: 60px;
+      background: rgba(0,0,0,.8);
+      overflow: hidden;
+
+      li {
+        width: 100%;
+        // border: 1px solid red;
+        padding: 10px 0;
+      }
+
+      li:nth-of-type(1) {
+        padding: {
+          top: 20px;
+        }
+      }
+
+       li:nth-of-type(7) {
+        padding: {
+          bottom: 20px;
+        }
+      }
+
+      .playStop {
+        display: none;
+      }
+    }
+  }
+}
+

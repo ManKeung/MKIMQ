@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+/**
+ * pad样式
+ */
+
+/**
+ * 导航
+ */
+
+header {
+  height: 88px;
+
+  nav {
+    width: 98%;
+    margin: 0 auto;
+
+    .phone {
+      display: none;
+    }
+
+    .nav_r {
+      display: block;
+    }
+
+    .nav_log li:first-of-type {
+      width: 50px;
+      height: 50px;
+      margin: 19px 0;
+      border: {
+        width: 4px;
+      }
+    }
+
+    .nav_log li:first-of-type::after {
+      font: {
+        size: 36px;
+      }
+      left: 2.8px;
+      top: -6px;
+    }
+
+    .nav_log li:last-of-type {
+      padding: 28px 0 0 8px;
+      letter-spacing: 2px;
+      font: {
+        size: 24px;
+        weight: 550;
+      }
+    }
+
+    ul li {
+      padding: {
+        top: 34px;
+      }
+    }
+
+    .nav_r li {
+      letter-spacing: 2px;
+      padding: {
+        left: 26px;
+      }
+    }
+  }
+}
+

@@ -38,49 +38,25 @@
 
     css(iconTop, 'display', displayTop);
 
-    /*for(var i = 0, len = main.length; i < len; i++) { // 方法有待改变
-      // 测试
-      console.log('main['+i+'] = ' + 'top: ' + offset(main[i]).top);
-      console.log('scrollRop = ' + scroll().top);
-      console.log('main['+i+'] = ' + 'height: ' + offset(main[i]).height);
-
-      if(offset(main[i]).top <= scroll().top <= (offset(main[i]).top + offset(main[i]).height)) {
-        console.log('在第：' + i + '区域');
-      }
-    }*/
-
-    // 用可视区判断
     let screenH = client().height;
     // console.log('屏幕高度：' + screenH);
     // console.log('滚动高度：' + scroll().top);
     for(var i=0, len=main.length; i<len; i++) {
       removeClass(roll[i], 'current');
-      if(screenH+scroll().top > offset(main[i]).top+offset(nav).height) {
-        // console.log(i+1+'在可视区域内');
+      if(screenH+scroll().top > offset(main[i]).top+offset(nav).height && scrollHeight != 0) {
         for(var j=0, le=roll.length; j<le; j++) {
           removeClass(roll[j], 'current');
         }
         addClass(roll[i], 'current');
-        /*if(i>0) {
-          if(screenH+scroll().top > offset(main[i-1]).top+offset(nav).height/2) {
-            for(var j=0, len=roll.length; j<len; j++) {
-              removeClass(roll[j], 'current');
-            }
-            addClass(roll[i-1], 'current');
-          }else {
-            for(var q=0, len=roll.length; q<len; q++) {
-              removeClass(roll[q], 'current');
-            }
-            addClass(roll[i], 'current');
-          }
-        }else {
-          for(var p=0, len=roll.length; p<len; p++) {
-            removeClass(roll[p], 'current');
-          }
-
-          addClass(roll[i], 'current');
-        }*/
+        // console.log(i+'在可视区域内');
       }
+    }
+
+    if(scrollHeight == 0) { // 解决回到顶部时
+      for(var i, len=main.length; i< len; i++) {
+        removeClass(roll[i], 'current');
+      }
+      addClass(roll[0], 'current');
     }
   }
 
@@ -135,11 +111,10 @@
   for(var i = 0,len = roll.length; i < len; i++) { // 滚动划屏
     roll[i].index = i;
 
-    on(roll[i], 'click', function(e) {
-      // console.log('这是第'+this.index+'个, '+'距离顶部为：'+offset(main[this.index]).top);
+    on(roll[i], 'click', function() {
       clearInterval(timer1);
       target1 = offset(main[this.index]).top - offset(nav).height; // 核心语句
-
+      // console.log(this);
       timer1 = setInterval(() => {
         leader1 = leader1 + (target1 - leader1) / 10;
         window.scrollTo(0, leader1);
@@ -224,5 +199,223 @@
         clearInterval(timer);
       }
     }, 30);
+  }
+}
+
+/**
+ * 关于我
+ */
+{
+  let aboutR = $('.about_r');
+  let aboutRC = aboutR.children; // 获取ul 2两个
+  let lis = html(aboutRC[0]);
+  html(aboutRC[0], lis+lis); // 增加一倍 li
+  let aboutli = aboutRC[0].children; // 获得所有li
+  // console.log(aboutli.length);
+  let aboutWidth = aboutWidth = offset(aboutR).width; // 得到父级的宽度
+  let aboutCWidth = aboutCWidth = aboutWidth * aboutli.length; // 得到ul宽度
+  // aboutWidth = offset(aboutR).width; // 得到父级的宽度
+  // aboutCWidth = aboutWidth * aboutli.length; // 得到ul宽度
+
+
+   // 动态设置轮播图大小
+  css(aboutRC[0], 'width', aboutCWidth + 'px');
+  for(let i=0, len=aboutli.length; i< len; i++) {
+    css(aboutli[i], 'width', aboutWidth+'px');
+  }
+
+  on(window, 'resize', () => { // 窗口拖动调整大小
+    aboutWidth = offset(aboutR).width; // 得到父级的宽度
+    aboutCWidth = aboutWidth * aboutli.length; // 得到ul宽度
+
+    // 动态设置轮播图大小
+    css(aboutRC[0], 'width', aboutCWidth + 'px');
+    for(let i=0, len=aboutli.length; i< len; i++) {
+      css(aboutli[i], 'width', (aboutWidth+'px'));
+    }
+  });
+  // console.log('父级宽度：'+aboutCWidth+'li宽度：' + aboutWidth); // 测试
+
+  let timer = null; // 定时器
+  let lisL = aboutli.length; // li的个数
+  let now = 0; // 计数
+  let ulLast = aboutRC[1];
+  // console.log(ulLast.children.length);
+  cssTransform(aboutRC[0], 'translateX', 0);
+  auto();
+
+  function auto() { // 自动播放
+    clearInterval(timer); // 先清除
+    timer = setInterval(() => {
+      if(now == lisL-1) {
+        now = ulLast.children.length -1;
+      }
+
+      css(aboutRC[0], 'transition', 'none');
+      cssTransform(aboutRC[0], 'translateX', -now*aboutWidth);
+      setTimeout(() => {
+        now++;
+        tab();
+      }, 30);
+    }, 3000);
+  }
+
+  function tab() { // 按钮
+    css(aboutRC[0], 'transition', '.5s');
+    cssTransform(aboutRC[0], 'translateX', -now * aboutWidth);
+
+    for(let i=0, len=ulLast.children.length; i<len; i++) {
+      removeClass(ulLast.children[i], 'active');
+    }
+
+    addClass(ulLast.children[now%ulLast.children.length], 'active');
+  }
+
+  on(aboutR, 'mouseover', () => { // 鼠标经过
+    clearInterval(timer);
+  });
+
+  on(aboutR, 'mouseout', () => { // 鼠标离开
+    auto();
+  });
+
+  // for(let i=0, len=ulLast.children.length; i<len; i++) { // 鼠标经过切换按钮
+  //   ulLast.children[i].index = i;
+  //   on(ulLast.children[i], 'mouseover', () => {
+  //     now = ulLast.children[i].index;
+
+  //     cssTransform(aboutRC[0], 'translateX', -now * aboutWidth);
+  //     tab();
+  //     // console.log('点击的是：'+ ulLast.children[i].index);
+  //   });
+  // }
+
+  if(!isMobile()) { // PC端才有鼠标经过切换效果
+    for(let i=0, len=ulLast.children.length; i<len; i++) { // 鼠标经过切换按钮
+      ulLast.children[i].index = i;
+      on(ulLast.children[i], 'mouseover', () => {
+        now = ulLast.children[i].index;
+
+        cssTransform(aboutRC[0], 'translateX', -now * aboutWidth);
+        tab();
+        // console.log('点击的是：'+ ulLast.children[i].index);
+      });
+    }
+  }
+
+  let buttonL = $all('.button_l');
+  let buttonR = $all('.button_r');
+  let main = $all('main');
+  let navHeight = $('header');
+  let leftHeight = offset(main[3]).top+offset(navHeight).height;
+  let rightHeight = offset(main[6]).top+offset(navHeight).height;
+  // console.log('left:'+buttonL.length, 'right:'+buttonR.length);
+  for(let i=0, len=buttonL.length; i<len; i++){ // 回到我的作品
+    on(buttonL[i], 'click', () => {
+      buttonTo(leftHeight);
+    });
+  }
+
+  for(let i=0, len=buttonR.length; i<len; i++){ // 回到联系我
+    on(buttonR[i], 'click', () => {
+      buttonTo(rightHeight);
+    });
+  }
+
+  function buttonTo(taget) { // 动画封装
+    let leader = 0, timer = null;
+
+    clearInterval(timer);
+    timer = setInterval(() => {
+      leader = leader + (taget - leader) / 10;
+      leader = leader>0 ? Math.ceil(leader) : Math.floor(leader);
+      window.scrollTo(0, leader);
+
+      if(leader == taget) {
+        clearInterval(timer);
+      }
+    }, 30);
+  }
+
+  if(isMobile()) { // 移动端才有滑动效果
+    let touchstart = 'touchstart';
+    let touchmove = 'touchmove';
+    let touchend = 'touchend';
+
+    // if(!isMobile()){ // 移动PC兼容
+    //   touchstart = 'mousedown';
+    //   touchmove = 'mousemove';
+    //   touchend = 'mouseup';
+    //   // console.log('PC');
+    // }
+
+    let startPoint = 0; // 刚点击或触碰的位置
+    let startX = 0; // 刚点击时移动的位置
+    let isMove = true; // 两个开关
+    let isFirst = true;
+
+    on(aboutR, touchstart, (event) => { // 按下
+      let ev = getEvent(event); // 兼容
+      startPoint = ev.changedTouches ? ev.changedTouches[0] : ev;
+      // console.log(ev);
+
+      clearInterval(timer);
+      css(aboutRC[0], 'transition', 'none');
+
+      let translateX = cssTransform(aboutRC[0], 'translateX');
+      // console.log(translateX);
+      now = Math.round(-translateX / aboutWidth); // 滚动到哪儿
+      // console.log(now);
+
+      if(now == 0) {
+        now = ulLast.children.length;
+      }
+
+      if(now == aboutRC[0].children.length-1) {
+        now = ulLast.children.length-1;
+      }
+      cssTransform(aboutRC[0], 'translateX', -now*aboutWidth);
+      startX = cssTransform(aboutRC[0], 'translateX');
+      // alert(startX);
+      isMove = true;
+      isFirst = true;
+      // alert(111); // ok
+    });
+
+    on(aboutR, touchmove, (event) => {
+      if(!isMove) {
+        return;
+      }
+      // alert(startX);
+      let ev = getEvent(event);
+      let nowPoint = ev.changedTouches ? ev.changedTouches[0] : ev;
+
+      let disX = nowPoint.pageX - startPoint.pageX;
+      // console.log(disX);
+      let disY = nowPoint.pageY - startPoint.pageY;
+
+      if(isFirst) {
+        isFirst = false;
+
+        if(Math.abs(disY) > Math.abs(disX)) { // 判断是上下还是左右移动
+          isMove = false;
+        }
+      }
+
+      if(isMove) {
+          // alert(disX + startX);
+          cssTransform(aboutRC[0], 'translateX', startX + disX);
+        }
+      window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+      // console.log(touch);
+    });
+
+    on(aboutR, touchend, (e) => {
+      let translateX = cssTransform(aboutRC[0], 'translateX');
+      // alert(translateX);
+      now = Math.round(-translateX / aboutWidth);
+      tab();
+      auto();
+    });
   }
 }

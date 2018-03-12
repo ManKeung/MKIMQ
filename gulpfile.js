@@ -55,7 +55,7 @@ gulp.task('script', () => {
       presets: ['env']
     }))
     .pipe(concat('min.js'))
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest('./dist/scripts'))
     .pipe(browserSync.reload({
       stream: true

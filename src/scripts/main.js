@@ -182,7 +182,7 @@ function removeAttr(obj, attr) {
 function addClass(obj, name) {
   var i = 0, len = 0;
 
-  if(obj.leng) {
+  if(obj.length) {
     for(i = 0, len = obj.length; i < len; i++) {
       addName(obj[i]);
     }

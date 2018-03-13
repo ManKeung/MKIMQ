@@ -6,7 +6,7 @@
  */
 
 // 变量
-$color:#00a78e #fff #1b242f #c7c7c7 #666666 #f4f4f4 #171717; // 主题色 字体白色 字体深黑黑 字体偏灰 字体偏黑 背景灰
+$color:#00a78e #fff #1b242f #c7c7c7 #666666 #f4f4f4 #171717 #586371; // 主题色 字体白色 字体深黑黑 字体偏灰 字体偏黑 背景灰
 $xcolor:#8C8989 #ccc #d4d4d4; // 分割线上下  左右 边框
 $fcolor:#44c7f4 #eb5424 #bb1e10 #237f52 #fdbd10; // 工作 学徒 实习 暑假工 学校
 $font:16px; // html设置字体大小
@@ -31,6 +31,25 @@ $font:16px; // html设置字体大小
         iteration-count: $it; // 动画播放次数 infinite 无线次数
         direction: $di; // 是否反向播放 alternate 反向
       }
+}
+
+/**
+ * 过渡
+ */
+
+@mixin transition($n:all,$do:2s,$fn:linear,$d:0) {
+  transition: {
+    property: $n; // 过渡属性
+    duration: $do; // 执行时间
+    timing-function: $fn; // 速度曲线
+    delay: $d; // 过渡何时开始
+  }
+  -webkit-transition: {
+    property: $n; // 过渡属性
+    duration: $do; // 执行时间
+    timing-function: $fn; // 速度曲线
+    delay: $d; // 过渡何时开始
+  }
 }
 
 /**
@@ -82,7 +101,7 @@ html,body {
  * 测试部分
  */
 
-#skill, #exp, #works, #project, #contact{
+#exp, #works, #project, #contact{
   width: 100%;
   height: 900px;
   background-color: nth($color,3);
@@ -553,6 +572,232 @@ header {
 
       .active {
         background-color: nth($color, 1);
+      }
+    }
+  }
+}
+
+/**
+ * 技能
+ */
+
+#skill {
+  background-color: nth($color, 3);
+
+  div {
+
+    // 类别标题 *********************************************************************************
+    .title {
+      color: nth($color, 2);
+
+      li:nth-of-type(1) {
+        background-color: nth($color, 1);
+        font: {
+          size: 20px;
+        }
+        letter-spacing: 1px;
+        line-height: 38px;
+        position: relative;
+        text-align: center;
+
+        width: 160px;
+        height: 40px;
+        margin: 0 auto;
+        @include shadow();
+      }
+
+      li:nth-of-type(1)::after {
+        content: "";
+        position: absolute;
+
+        border: {
+          width: 14px 11px 0 12px;
+          color: nth($color, 1) transparent transparent transparent;
+          style: solid;
+        }
+        bottom: -9px;
+        left: 12px;
+      }
+
+      li:nth-of-type(2) {
+        font: {
+          size: 28px;
+        }
+
+        width: 170px;
+        margin: 0 auto;
+        padding: {
+          top: 8px;
+          bottom: 24px;
+        }
+
+        // border: 1px solid red;
+
+        span {
+          display: inline-block;
+          letter-spacing: 4px;
+        }
+
+        span:first-of-type {
+          padding-left: 10px;
+        }
+
+        span:last-of-type {
+          font: {
+            weight: 700;
+            size: 30px;
+          }
+
+          padding-left: 20px;
+        }
+      }
+
+      li:last-of-type {
+        width: 200px;
+        height: 1px;
+        background-color: nth($color, 2);
+        margin: 0 auto;
+        position: relative;
+      }
+
+      li:last-of-type::after {
+        content: "";
+        position: absolute;
+        width: 80px;
+        height: 6px;
+        background-color: nth($color, 1);
+        left: 58px;
+        top: -3px;
+        display: inline-block;
+      }
+    }
+    //*******************************************************************************************
+
+    ul:nth-of-type(2) {
+      // background-color: red;
+      li {
+        float: left;
+      }
+
+      li:first-of-type { // 图标
+        width: 180px;
+        // height: 300px;
+
+        span {
+          display: inline-block;
+          vertical-align: middle; // 属性设置元素的垂直对齐方式
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+          box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+          -moz-osx-font-smoothing: grayscale;
+          position: relative;
+          background: nth($color, 1);
+          -webkit-transition-property: color;
+          transition-property: color;
+          -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+          width: 70px;
+          height: 70px;
+          text-align: center;
+          line-height: 70px;
+          border-radius: 50%;
+          color: nth($color, 2);
+
+          font: {
+            size: 24px;
+          }
+        }
+
+        span::after {
+          content: "\e60a";
+          display: inline-block;
+          text-align: center;
+          line-height: 70px;
+          width: 70px;
+          height: 70px;
+          background-color: nth($color, 2);
+          border-radius: 50%;
+          color: nth($color, 1);
+          position: absolute;
+          top: 0;
+          left: 0;
+          -webkit-transform: scale(1);
+          transform: scale(1);
+          -webkit-transition-property: transform;
+          transition-property: transform;
+          -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+          -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+
+        }
+
+        span:hover {
+          color: nth($color, 2);
+        }
+
+        span:hover::after {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+      }
+
+      li:nth-of-type(2) {
+        width: 342px;
+        // height:300px;
+        @include box();
+
+        dl {
+          dt {
+            color: nth($color, 1);
+            font: {
+              size: 18px;
+              weight: 550;
+            }
+          }
+
+          dd {
+            color: nth($color, 8);
+            font-size: 16px;
+            line-height: 30px;
+          }
+        }
+      }
+
+      li:nth-of-type(3) { // 图标
+        width: 276px;
+        // height: 300px;
+        @include box();
+
+        @extend li:first-of-type;
+        span::after {
+          content: "\e64f";
+        }
+      }
+
+      li:last-of-type {
+        width: 342px;
+        // height: 300px;
+
+        @extend li:nth-of-type(2);
+      }
+    }
+
+    ul:last-of-type {
+      @extend ul:nth-of-type(2);
+
+      li:first-of-type {
+        span::after {
+          content: "\e8a6";
+        }
+      }
+
+      li:nth-of-type(3) {
+        span::after {
+          content: "\e675";
+        }
       }
     }
   }

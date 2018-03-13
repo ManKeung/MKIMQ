@@ -238,3 +238,50 @@ header {
     }
   }
 }
+
+/**
+ * 技能
+ */
+
+#skill {
+  padding: {
+    top: 80px;
+    bottom: 80px;
+  }
+
+  div {
+    width: 1140px;
+    margin: 0 auto;
+
+    ul:nth-of-type(2) {
+      // background-color: red;
+      padding-top: 60px;
+
+      li:first-of-type { // 图标
+        width: 180px;
+      }
+
+      li:nth-of-type(2) {
+        width: 342px;
+        // height:300px;
+
+      }
+
+      li:nth-of-type(3) { // 图标
+        width: 276px;
+        padding-left: 84px;
+
+
+      }
+
+      li:last-of-type {
+        width: 342px;
+
+      }
+    }
+
+    ul:last-of-type {
+      @extend ul:nth-of-type(2);
+    }
+  }
+}

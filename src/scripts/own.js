@@ -419,3 +419,19 @@
     });
   }
 }
+
+/**
+ * 经历
+ */
+
+{
+  let expBig = $('#exp-big');
+  let iconE = $all('.icon_e');
+  let height = offset(expBig).height / 6 + 36 +'px';
+  for(let i=0, len=iconE.length; i<len; i++) {
+    css(iconE[i], 'height', height);
+    // iconE[i].style.height = height;
+  }
+
+  css(iconE[iconE.length-1], 'height', parseFloat(height)+30+'px');
+}

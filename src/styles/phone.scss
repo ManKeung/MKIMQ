@@ -318,3 +318,85 @@ header {
     }
   }
 }
+
+/**
+ * 经历
+ */
+
+#exp {
+  padding: {
+    top: 80px;
+    bottom: 80px;
+  }
+
+ div {
+  width: 96%;
+
+  .exp_big {
+    width: 100%;
+    padding: {
+      top: 10px;
+    }
+
+    ul:first-of-type {
+      li:first-of-type {
+        display: none;
+      }
+
+      li:nth-of-type(2) {
+        // border: 1px solid red;
+        display: none;
+        width: 50px;
+        height: 50px;
+      }
+
+      li:last-of-type {
+        width: 100%;
+        padding: {
+          top: 30px;
+          left: 10px;
+        }
+
+        dl {
+          padding: {
+            top: 20px;
+            right: 20px;
+            bottom: 20px;
+            left: 20px;
+          }
+
+
+          dt {
+            font: {
+              size: 20px;
+              weight: 550;
+            }
+          }
+
+          dd {
+            padding: {
+              top: 8px;
+            }
+          }
+        }
+      }
+    }
+
+    ul:nth-of-type(2) {
+      @extend ul:first-of-type;
+    }
+
+    ul:nth-of-type(3) {
+      @extend ul:first-of-type;
+    }
+
+    ul:nth-of-type(4) {
+      @extend ul:first-of-type;
+    }
+
+    ul:nth-of-type(5) {
+      @extend ul:first-of-type;
+    }
+  }
+ }
+}

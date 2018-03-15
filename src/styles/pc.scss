@@ -441,3 +441,55 @@ header {
     right: 13px;
   }
 }
+
+/**
+ * 项目介绍
+ */
+
+#project {
+  padding: {
+    top: 80px;
+    bottom: 80px;
+  }
+
+  div:first-of-type {
+    width: 1140px;
+
+    .project_big {
+      width: 1140px;
+
+      ul {
+
+        li {
+          height: 370px;
+          width: 50%;
+        }
+
+        .project_img {
+          width: 50%;
+          height: 370px;
+        }
+
+        .project_msg {
+          dl {
+            height: 370px;
+            padding: {
+              left: 40px;
+              top: 40px;
+              right: 80px;
+            }
+            dt {
+            font: {
+              size: 22px;
+              weight: 550;
+            }
+
+            letter-spacing: 2px;
+            padding-bottom: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

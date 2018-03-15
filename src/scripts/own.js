@@ -78,20 +78,23 @@
       }
     }, 20);
   });
-
-  let playStop = $('.playStop');
+/***************************************************************************/
+  let playStop = $('.playStop'); // 音乐
   let music = $('#music');
   let play = $('.play');
   let stop = $('.stop');
+  let hiddenFalg = true; // 判断是用户点击暂停音乐
 
   if(music.paused) {
     music.play(); // 暂停
     hide(stop);
     show(play);
+    // hiddenFalg = true;
   }else {
     music.pause();
     hide(play);
     show(stop);
+    // hiddenFalg = false;
   }
 
   on(playStop, 'click', () => { // 点击播放暂停音乐
@@ -99,13 +102,30 @@
       music.play(); // 暂停
       hide(stop);
       show(play);
+      hiddenFalg = true;
     }else {
       music.pause();
       hide(play);
       show(stop);
+      hiddenFalg = false;
     }
   });
 
+// 判断用户离开页面暂停音乐
+  var hiddenProperty = 'hidden' in document ? 'hidden' :
+  'webkitHidden' in document ? 'webkitHidden' :
+  'mozHidden' in document ? 'mozHidden' : null;
+  var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+
+  on(document, visibilityChangeEvent, () => {
+    if(!document[hiddenProperty] && hiddenFalg) {
+      music.play();
+    }else {
+      music.pause();
+    }
+  });
+
+/******************************************************************************/
   let roll = $all('.roll');
   let main = $all('main');
   // console.log('roll = ' + roll.length, ' main = ' + main.length);
@@ -315,9 +335,9 @@
   let buttonR = $all('.button_r');
   let main = $all('main');
   let navHeight = $('header');
-  let leftHeight = offset(main[3]).top+offset(navHeight).height;
-  let rightHeight = offset(main[6]).top+offset(navHeight).height;
-  // console.log('left:'+buttonL.length, 'right:'+buttonR.length);
+  let leftHeight = offset(main[4]).top;
+  let rightHeight = offset(main[5]).top;
+
   for(let i=0, len=buttonL.length; i<len; i++){ // 回到我的作品
     on(buttonL[i], 'click', () => {
       buttonTo(leftHeight);
@@ -571,7 +591,7 @@
 
           dt.innerHTML = title;
           html(dt, title);
-          css(dd, 'backgroundImage', `url(./images/ui/${image})`);
+          css(dd, 'backgroundImage', `url(../images/ui/${image})`);
           css(show, 'display', 'block');
           top = scroll().top;
           // console.log(top);
@@ -622,10 +642,60 @@
  */
 
 {
-  // 数据 title 标题 desc 描述 data 详情 url 图片名字
+  // 数据 title 标题 desc 描述 do 自己职责 url 图片名字
   let arrJ = [
-    {title: '超融合管理平台', desc: '设计规划建设大数据平台，整合数据资源，发挥数据新价值，提升决策和风险防范水平，提高治理能力；实现对经济运行更为准确的监测、分析、预测、预警，提高决策的针对性、科学性和时效性。同时，也可通过互联网公共服务门户，面向社会大众提供政务数据服务，提升地方政府的社会服务治理水平。', deta: '以最高人民法院提出的“大数据、大格局、大服务”理念为指导原则，针对各级法院信息系统建设独立、法院内部各系统信息分散情况，以司法审判信息资源库及相应的信息资源交换和目录服务体系为支撑，运用顶层设计思想，从省高院、中院全局视角出发，科学整合各类司法信息资源，构建集审判动态、司法统计、审判质效、司法人事、司法公开、司法行政等一体的全方位、立体化和可视化的“司法信息数据平台”，实现对法院司法信息资源的海量存储、科学分类、多元检索，为法院多视角、多层级、多方面的信息服务和决策支持应用提供数据支撑。', url: 'j01.png'},
-    {title: '综合指挥调度平台', desc: '以互联网、物联网、GIS等技术融合为支撑，以大数据融合为驱动，推出了综合指挥调度系统。实现音视频调度、集群对讲、数据调度、GIS调度、远程监控、视频会议等一体的综合调度平台，为客户提供专业的解决方案，解决指挥手段繁多、系统融合难度高等问题，完美实现系统联动、调度。', deta: '政府部门力量分散、条块分割、职能交叉、推诿扯皮等现象突出，各级、各类管理资源和力量急需进一步优化和整合。公司以P3业务基础平台流程管理为引擎，融合云呼叫中心、视联网、即时通信、物联网、GIS等技术，构建大联动信息平台。通过整合业务资源，实现城市治理不同部门异构系统间的资源共享和业务协同。运用大数据思维和技术，不断整合优化业务流程，构建城市治理联动中心，持续推进服务治理线上线下融合创新，构建“大联动+大数据应用”新机制，驱动城市治理从“经验治理”转向“科学治理”，引领城市治理联动新格局。为政府探索解决传统社会管理和服务理念、体制、机制、制度、方法等不适应社会经济发展需要的突出问题提供了完整的信息化解决方案，极大的节约了行政成本、提高了行政效能，全面提升了区域社会治理和服务的能力。', url: 'j02.png'},
-    {title: '勤务及队伍管理现代化', desc: '针对执法人员出勤制度、装备管理制度、重大安保活动保障要求和流动性大的特点，创造性地将勤务和人员管理与案事件、任务、指挥、装备进行融合关联，并结合4G移动终端，解决了各级执法部门勤务和队伍管理的痛点，引领勤务和队伍管理从传统落后局面迈向现代化。', data: '凭借对公安指挥体系的深刻理解，结合依托指挥体系的信息化系统特点和发展规划，为各级公安机关打造具有先进合成作战指挥理念的现代化指挥中心。指挥中心不仅考虑传统功能分区，更兼顾警种之间的配合协作、各类信息系统之间的兼容集成、各类指挥场景的灵活切换和与政法委的双中心互动。在平台融合、业务融合先进理念的支撑下，为公安机关打造运行稳定、调度灵活、扩展简单的新一代合成作战指挥中心。', url: 'j03.png'}
+    {title: '超融合自动化运维系统', desc: '提供自主可控的分布式数据库、分布式数据仓库、分布式文件存储、分布式内存缓存、统一计算以及融合虚拟化平台。 提供面向文本处理的文本智能分析一体化引擎以及面向视频分析的影响智能分析一体化引擎。支持多种计算模式，包括Deep Learning+CPU/Deep Learning+GPU/Deep Learning+FPGA+CNN。', do: '超融合项目中根据需求，设计出界面效果，讨论通过后，根据设计图完成前端代码编写，与后台协作完成。', url: 'j01.png'},
+    {title: '成华公安扁平化指挥系统', desc: '以互联网、物联网、GIS等技术融合为支撑，以大数据融合为驱动，推出了综合指挥调度系统。实现音视频调度、集群对讲、数据调度、GIS调度、远程监控、视频会议等一体的综合调度平台，为客户提供专业的解决方案，解决指挥手段繁多、系统融合难度高等问题，完美实现系统联动、调度。', do: '在成华项目组，主要职责：设计移动勤务协助安卓开发人员工作，同时嵌套h5代码；为指挥系统客服端设计界面及图表；为勤务报备系统写前台和后台页面。', url: 'j02.png'},
+    {title: '彭州公安队伍管理APP', desc: '针对执法人员出勤制度、装备管理制度、重大安保活动保障要求和流动性大的特点，创造性地将勤务和人员管理与案事件、任务、指挥、装备进行融合关联，并结合4G移动终端，解决了各级执法部门勤务和队伍管理的痛点，引领勤务和队伍管理从传统落后局面迈向现代化。', do: '队伍管理项目，主要职责：界面设计，及书写管理后台页面。', url: 'j03.png'}
   ];
+
+  function randomSort(arr, newArr) { // 随机数组
+    if(arr.length == 1) {
+      newArr.push(arr[0]);
+
+      return newArr;
+    }
+
+    var random = Math.ceil(Math.random()*arr.length) - 1;
+    newArr.push(arr[random]);
+    arr.splice(random,1);
+
+    return randomSort(arr, newArr);
+  }
+  let newJ = []
+
+  newJ = randomSort(arrJ, newJ);
+
+  let imgList= $all('.project_img');
+  let dlList= $all('.dl_msg');
+  // console.log(dlList[0].children);
+
+  function msgImg(img, msg, arr) { // 方法
+    css(img, 'backgroundImage', `url(../images/ui/${arr.url})`);
+    msg.children[0].innerHTML = arr.title;
+    msg.children[1].innerHTML = arr.desc;
+    msg.children[2].innerHTML = arr.do;
+  }
+
+  for(let i=0, len=imgList.length; i< len; i++) {
+    msgImg(imgList[i], dlList[i], newJ[i]);
+  }
+}
+
+/**
+ * 走过的岁月
+ */
+
+{
+  let home = $('#home');
+  let startTime = new Date('1991/10/11'); // 出生日期
+
+  function youngYears() {
+    let nowTime = new Date(); // 现在时间
+    let d = (nowTime.getFullYear() - startTime.getFullYear()) * 365;
+
+    attr(home, 'data-yongYears', `亲爱的❥(^_-)[ManKeung]，(#^.^#)走过${d}天︿(￣︶￣)︿`);
+  }
+
+  youngYears();
 }

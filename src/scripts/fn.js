@@ -37,3 +37,41 @@ function randomSort(arr, newArr) {
 // 排序
 // var arr = [3,2,1,10,0];
 // console.log(arr.sort((a,b)=>a-b));
+
+/*{ // 验证用户是否离开页面
+    // 兼容性：IE10+，Firefox10+,Chrome14+,Opera12.1+,Safari7.1+
+
+  var hiddenProperty = 'hidden' in document ? 'hidden' :
+  'webkitHidden' in document ? 'webkitHidden' :
+  'mozHidden' in document ? 'mozHidden' : null;
+  var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+
+  document.addEventListener(visibilityChangeEvent, function() {
+
+    if(!document[hiddenProperty]) {
+
+      document.title = 0;
+    } else {
+      document.title = 1;
+    }
+  });
+
+}*/
+/**********************************************************/
+
+// 用户选择类容
+/*function getTxt() { // 方法要结合事件
+
+  var txt = null;
+
+  if(window.getSelect) {
+    txt = window.getSelection().toString(); // 转化成字符串
+  }else if(document.selection) {
+    txt = document.selection.createRang().txt; // ie 写法
+  }else {
+    txt = 'no selection!!!'
+  }
+
+  return txt;
+}*/
+/**********************************************************/

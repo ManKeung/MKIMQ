@@ -17,6 +17,7 @@
 <body>
   <!-- 导航栏 start -->
   <header>
+    <span id="header-span"> <!--为了兼容无滚动条新家-->
     <nav class="clearfix">
       <!-- log -->
       <ul class="nav_log fl">
@@ -54,6 +55,7 @@
         </li>
       </ul>
     </nav>
+    </span>
   </header>
   <!-- 导航 end -->
 
@@ -266,7 +268,34 @@
   <!-- 经历 end -->
 
   <!-- 作品 start -->
-  <main id="works"></main>
+  <main id="works">
+    <ul class="title2">
+      <li>MY&nbsp;I&nbsp;WORKS</li>
+      <li><span>我的</span><span>作品</span></li>
+      <li></li>
+    </ul>
+    <ul>
+      <li class="clearfix" id="li-span">
+        <span class="current_all">所有</span>
+        <span>WEB界面</span>
+        <span>MOBILE界面</span>
+        <span>平面设计</span>
+      </li>
+    </ul>
+    <div id="bigdiv" class="show_works">
+      <ul class="ulblock clearfix"></ul>
+      <ul class="clearfix"></ul>
+      <ul class="clearfix"></ul>
+      <ul class="clearfix"></ul>
+    </div>
+    <div class="show_img">
+      <dl>
+        <dt id="dt-title">Image-title</dt>
+        <dd id="dd-img"></dd>
+      </dl>
+      <span class="span_img"></span>
+    </div>
+  </main>
   <!-- 作品 end -->
 
   <!-- 项目介绍 start -->

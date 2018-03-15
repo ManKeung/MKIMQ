@@ -191,7 +191,7 @@ function addClass(obj, name) {
   }
 
   function addName(obj) {
-    obj.className = obj.className + ' ' + name; // 把原先的class属性加上
+    obj.className = trim(obj.className) + ' ' + name; // 把原先的class属性加上
   }
 }
 
@@ -208,7 +208,7 @@ function removeClass(obj, name) {
   }
 
   function removeName(obj) {
-    obj.className = obj.className.replace(name, '');
+    obj.className = trim(obj.className.replace(name, ''));
   }
 }
 
@@ -430,7 +430,7 @@ function client() {
 // 创建标签
 function el(el) {
 
-  return document.creatElement(el);
+  return document.createElement(el);
 }
 
 // 内容

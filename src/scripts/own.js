@@ -58,6 +58,9 @@
       }
       addClass(roll[0], 'current');
     }
+
+    // let body = $('body');
+    // console.log(body.style.cssText);
   }
 
   let scrollHeight = 0, target = 0, timer = null; // 回到顶部参数
@@ -146,13 +149,17 @@
 
   on(phone, 'click', () => {
     if(flag) {
+      document.body.style.overflow = "hidden"; // 隐藏滚动条
       addClass(navr, 'nav_r_add');
-      animate(navr, 0, target)
+      animate(navr, 0, target);
       flag = false;
+
     }else {
+      document.body.style.overflow = "visible"; // 显示滚动条
       animate1(navr, target, 0);
       // removeClass(navr, 'nav_r_add');
       flag = true;
+
     }
   });
 
@@ -161,10 +168,11 @@
   for(var i=0, len=navrli.length-1; i<len; i++) {
     // console.log('ok');
     if(isMobile()) {
-       on(navrli[i], 'click', () => {
-       // console.log(i);
-       animate1(navr, target, 0);
-       flag = true;
+      on(navrli[i], 'click', () => {
+        document.body.style.overflow = "visible"; // 显示滚动条
+        animate1(navr, target, 0);
+        // removeClass(navr, 'nav_r_add');
+        flag = true;
       });
     }
   }
@@ -434,4 +442,190 @@
   }
 
   css(iconE[iconE.length-1], 'height', parseFloat(height)+30+'px');
+}
+
+/**
+ * 作品
+ */
+
+{
+  /**
+   * 数据 title 标题 url 图片地址
+   */
+
+  let arrP = [
+    {title: '超融合自动化运维系统', url: 'p01.png'},
+    {title: '彭州公安队伍管理后台系统', url: 'p02.png'},
+    {title: '成华公安后台报备管理系统', url: 'p03.png'},
+    {title: '偏平化系统', url: 'p04.png'}
+  ];
+
+  let arrM = [
+    {title: '彭州队伍管理APP', url: 'm01.png'},
+    {title: '雪亮工程APP', url: 'm02.png'},
+    {title: '考勤APP', url: 'm03.png'},
+    {title: '报备APP', url: 'm04.png'}
+  ];
+
+  let arrU = [
+    {title: '派沃特宣传画册', url: 'u01.png'},
+    {title: '派沃特宣传DM单', url: 'u02.png'},
+    {title: '派沃特公司简介易拉宝', url: 'u03.png'},
+    {title: '派沃特企业VI', url: 'u04.png'}
+  ];
+
+  let arrAll = arrP.concat(arrM, arrU);
+
+  function randomSort(arr, newArr) { // 随机数组
+    if(arr.length == 1) {
+      newArr.push(arr[0]);
+
+      return newArr;
+    }
+
+    var random = Math.ceil(Math.random()*arr.length) - 1;
+    newArr.push(arr[random]);
+    arr.splice(random,1);
+
+    return randomSort(arr, newArr);
+  }
+
+  let newAll = [];
+  let newP = [];
+  let newM = [];
+  let newU = [];
+
+  randomSort(arrAll, newAll);
+  randomSort(arrP, newP);
+  randomSort(arrM, newM);
+  randomSort(arrU, newU);
+  // *************************************
+   /**
+   *  数据随机
+   */
+
+   /**
+    * 创建li标签
+    */
+  function list(parent, arr) { // 方法创建li标签并且设置背景图片
+    // console.log(parent, arr.length); // ok
+    for(var i=0, len=arr.length; i<len; i++) {
+      let li = el('li'); // li 标签
+      attr(li, 'data-title', arr[i].title);
+      attr(li, 'data-url', arr[i].url);
+      css(li, 'backgroundImage', `url(./images/ui/${arr[i].url})`);
+      // html(li, arr[i].url);
+      parent.appendChild(li);
+    }
+
+    // console.log('sum = '+parent + arr, 'li: '+li);
+  }
+  // list(ulLis[0], newAll);
+  // ***************************************
+
+  // 点击切换
+  let li = $('#li-span');
+  let liSpan = li.children; // 所有的span
+  let bigdiv = $('#bigdiv');
+  let ulLis = bigdiv.children;
+
+  /*console.log(liSpan.length);
+  console.log(ulLis);*/
+  for(let i=0, len=liSpan.length; i<len; i++) {
+    on(liSpan[i], 'click', function(num) {
+      return () => {
+
+        for(var j=0; j<liSpan.length; j++) {
+          removeClass(liSpan[j], 'current_all');
+          removeClass(ulLis[j], 'ulblock');
+        }
+
+        addClass(liSpan[num], 'current_all');
+        addClass(ulLis[num], 'ulblock');
+        // console.log('第：'+num+'个');
+      }
+    }(i));
+  }
+  list(ulLis[0], newAll);
+  list(ulLis[1], newP);
+  list(ulLis[2], newM);
+  list(ulLis[3], newU);
+
+  function getData(obj) { // 得到点击的数据
+    return {
+
+      title: attr(obj, 'data-title'),
+      url: attr(obj, 'data-url')
+    }
+  }
+  // let falg = false;
+  // let Height = 0;
+  let top = 0;
+  function clickImg(obj, dt, dd, show) { // 点击的那个ul obj 那张图标 dt 标题 dd 插入背景图 show 展示
+    for(let i=0, len=obj.length; i<len; i++) {
+      on(obj[i], 'click', function(num) {
+
+        return () => {
+          let title = getData(obj[num]).title;
+          let image = getData(obj[num]).url;
+
+          dt.innerHTML = title;
+          html(dt, title);
+          css(dd, 'backgroundImage', `url(./images/ui/${image})`);
+          css(show, 'display', 'block');
+          top = scroll().top;
+          // console.log(top);
+          let body = $('body');
+          // addClass(body, 'addBody');
+          let header = $('#header-span');
+          css(body, 'position', 'fixed');
+          css(body, 'top', -top + 'px');
+          // window.scrollTo(0, '88px');
+          // alert(scroll().top);
+          css(header, 'backgroundColor', 'rgba(23, 23, 23, 1)');
+        }
+      }(i));
+    }
+  }
+
+  // console.log(top);
+
+  let dt = $('#dt-title');
+  let dd = $('#dd-img');
+  let showImage = $('.show_img');
+  let spanImg = $('.span_img');
+  let showL1 = ulLis[0].children;
+  let showL2 = ulLis[1].children;
+  let showL3 = ulLis[2].children;
+  let showL4 = ulLis[3].children;
+  // console.log(`dt:${dt}, dd:${dd}, showImage:${showImage}`); // ok选择器没问题
+  // alert(getData(showL1[0]).url);
+  clickImg(showL1, dt, dd, showImage);
+  clickImg(showL2, dt, dd, showImage);
+  clickImg(showL3, dt, dd, showImage);
+  clickImg(showL4, dt, dd, showImage);
+  on(spanImg, 'click', () => {
+    css(showImage, 'display', 'none');
+
+    let body = $('body');
+    let header = $('#header-span');
+    css(body, 'position', 'relative');
+    css(header, 'backgroundColor', 'rgba(23, 23, 23, 0)');
+    css(body, 'top', 0);
+    // css(header, 'top', 0);
+    window.scrollTo(0, top);
+  });
+}
+
+/**
+ * 项目介绍
+ */
+
+{
+  // 数据 title 标题 desc 描述 data 详情 url 图片名字
+  let arrJ = [
+    {title: '超融合管理平台', desc: '设计规划建设大数据平台，整合数据资源，发挥数据新价值，提升决策和风险防范水平，提高治理能力；实现对经济运行更为准确的监测、分析、预测、预警，提高决策的针对性、科学性和时效性。同时，也可通过互联网公共服务门户，面向社会大众提供政务数据服务，提升地方政府的社会服务治理水平。', deta: '以最高人民法院提出的“大数据、大格局、大服务”理念为指导原则，针对各级法院信息系统建设独立、法院内部各系统信息分散情况，以司法审判信息资源库及相应的信息资源交换和目录服务体系为支撑，运用顶层设计思想，从省高院、中院全局视角出发，科学整合各类司法信息资源，构建集审判动态、司法统计、审判质效、司法人事、司法公开、司法行政等一体的全方位、立体化和可视化的“司法信息数据平台”，实现对法院司法信息资源的海量存储、科学分类、多元检索，为法院多视角、多层级、多方面的信息服务和决策支持应用提供数据支撑。', url: 'j01.png'},
+    {title: '综合指挥调度平台', desc: '以互联网、物联网、GIS等技术融合为支撑，以大数据融合为驱动，推出了综合指挥调度系统。实现音视频调度、集群对讲、数据调度、GIS调度、远程监控、视频会议等一体的综合调度平台，为客户提供专业的解决方案，解决指挥手段繁多、系统融合难度高等问题，完美实现系统联动、调度。', deta: '政府部门力量分散、条块分割、职能交叉、推诿扯皮等现象突出，各级、各类管理资源和力量急需进一步优化和整合。公司以P3业务基础平台流程管理为引擎，融合云呼叫中心、视联网、即时通信、物联网、GIS等技术，构建大联动信息平台。通过整合业务资源，实现城市治理不同部门异构系统间的资源共享和业务协同。运用大数据思维和技术，不断整合优化业务流程，构建城市治理联动中心，持续推进服务治理线上线下融合创新，构建“大联动+大数据应用”新机制，驱动城市治理从“经验治理”转向“科学治理”，引领城市治理联动新格局。为政府探索解决传统社会管理和服务理念、体制、机制、制度、方法等不适应社会经济发展需要的突出问题提供了完整的信息化解决方案，极大的节约了行政成本、提高了行政效能，全面提升了区域社会治理和服务的能力。', url: 'j02.png'},
+    {title: '勤务及队伍管理现代化', desc: '针对执法人员出勤制度、装备管理制度、重大安保活动保障要求和流动性大的特点，创造性地将勤务和人员管理与案事件、任务、指挥、装备进行融合关联，并结合4G移动终端，解决了各级执法部门勤务和队伍管理的痛点，引领勤务和队伍管理从传统落后局面迈向现代化。', data: '凭借对公安指挥体系的深刻理解，结合依托指挥体系的信息化系统特点和发展规划，为各级公安机关打造具有先进合成作战指挥理念的现代化指挥中心。指挥中心不仅考虑传统功能分区，更兼顾警种之间的配合协作、各类信息系统之间的兼容集成、各类指挥场景的灵活切换和与政法委的双中心互动。在平台融合、业务融合先进理念的支撑下，为公安机关打造运行稳定、调度灵活、扩展简单的新一代合成作战指挥中心。', url: 'j03.png'}
+  ];
 }

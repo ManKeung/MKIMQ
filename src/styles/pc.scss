@@ -385,3 +385,59 @@ header {
   }
  }
 }
+
+/**
+ * 作品
+ */
+
+#works {
+
+  ul:nth-of-type(2) {
+    width: 100%;
+
+    // 切换按钮
+    li {
+      width: 452px;
+    }
+  }
+
+  .show_works {
+
+    ul {
+
+      li {
+        width: 25%;
+        height: 360px;
+      }
+    }
+  }
+
+  .show_img {
+
+    dl {
+      width: 650px;
+      height: 450px;
+      left: 50%;
+      margin-left: -325px;
+      top: 50%;
+      margin-top: -230px;
+
+      dt {
+        font: {
+          size: 30px;
+        }
+
+        top: -70px;
+      }
+    }
+  }
+
+  .show_img .span_img {
+    right: 20px;
+    top: 20px;
+  }
+  .show_img .span_img::after, .show_img .span_img::before{
+    top: 38px;
+    right: 13px;
+  }
+}

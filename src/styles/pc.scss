@@ -493,3 +493,209 @@ header {
     }
   }
 }
+
+/**
+ * 联系方式
+ */
+
+#contact {
+  background: {
+    image: url(../images/pc/bottombg.png);
+    size: cover;
+    repeat: no-repeat;
+  }
+
+  div:first-of-type {
+    width: 1140px;
+    padding: {
+      top: 80px;
+      bottom: 40px;
+    }
+
+    .bottom_msg {
+      ul {
+        width: 560px;
+        padding: 30px;
+      }
+
+      ul:first-of-type {
+
+        li {
+          height: 200px;
+          padding-top: 28px;
+
+          dl {
+            dt {
+              font: {
+                size: 36px;
+              }
+            }
+
+            dd {
+              height: 40px;
+            }
+
+            dd:first-of-type {
+              font: {
+                size: 20px;
+              }
+            }
+          }
+        }
+      }
+
+      ul:last-of-type {
+
+        form {
+          .form_txt {
+            // display: inline-block;
+            height: 60px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+
+            input {
+              // border: 1px solid red;
+              height: 60px;
+              line-height: 24px;
+              line-height: 60px;
+              font: {
+                size: 16px;
+              }
+            }
+
+            label {
+              height: 54px;
+              line-height: 54px;
+              padding-left: 10px;
+              font: {
+                size: 16px;
+              }
+            }
+
+            .error { // 错误提示
+              // display: none; // 用隐藏的哈 显示过后要延迟100ms再执行
+              top: 50px;
+              left: 30px;
+              padding: {
+                top: 6px;
+                right: 6px;
+                left: 32px;
+                bottom: 6px;
+              }
+
+              // 动画
+            }
+          }
+
+          .form_te {
+            height: 220px;
+            padding: 18px 10px;
+
+            label {
+              left: 10px;
+              top: 18px;
+              width: 100px;
+              height: 24px;
+              font: {
+                size: 16px;
+              }
+            }
+          }
+
+          .form_sub {
+            height: 80px;
+
+            input {
+              width: 120px;
+              height: 50px;
+              line-height: 50px;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .footer {
+      ul {
+        width: 400px;
+
+        li {
+          width: 50px;
+          height: 50px;
+          line-height: 50px;
+          font: {
+            size: 20px;
+          }
+          position: relative;
+          margin-right: 20px;
+        }
+
+        li:last-of-type {
+          margin-right: 0;
+        }
+
+        li::after {
+          width: 40px;
+          height: 40px;
+          left: 3px;
+          top: 3px;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * 弹出窗
+ */
+
+.caveat {
+
+  div {
+    width: 450px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -225px;
+
+    ul:first-of-type {
+      height: 45px;
+      padding: {
+        top: 10px;
+        bottom: 10px;
+        left: 20px;
+        right: 20px;
+      }
+
+      li:last-of-type {
+        width: 26px;
+        height: 45px;
+        margin-top: -10px;
+        padding-top: 10px;
+        padding-left: 15px;
+      }
+    }
+
+    ul:last-of-type {
+      padding: {
+        top: 50px;
+        left: 40px;
+        right: 20px;
+        bottom: 20px;
+      }
+
+      li:last-of-type {
+        width: 320px;
+        margin-left: 20px;
+
+        /* i {
+          color: red;
+        } */
+      }
+    }
+  }
+}

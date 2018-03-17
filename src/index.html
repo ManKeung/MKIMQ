@@ -116,7 +116,7 @@
             <dt>
               <span>Hi&nbsp;I'm&nbsp;</span><span>Mankeung</span>
             </dt>
-            <dd>1.&nbsp;熟练使用PS、AI等设计软件；2.&nbsp;能独立完成网站排版设计；3.&nbsp;熟悉CSS预处理语言SASS，能使用HTML5+CSS3、JavaScript、JQuery、Ajax、SQL和Nodejs等前端技术对设计图高度还原；4.&nbsp;会使用VUE进行数据双向绑定及单页面开发；4.&nbsp;会Git、Gulp、webpack对项目开发及版本管理。</dd>
+            <dd>1.&nbsp;熟练使用PS、AI等设计软件；2.&nbsp;能独立完成网站排版设计；3.&nbsp;熟悉CSS预处理语言SASS，能使用HTML5+CSS3、JavaScript、JQuery、Ajax、SQL、面向对象和Nodejs等前端技术对设计图高度还原；4.&nbsp;会使用VUE进行数据双向绑定及单页面开发；4.&nbsp;会Git、Gulp、webpack对项目开发及版本管理。</dd>
           </dl>
           <dl><span class="button_l">作&nbsp;&nbsp;品</span><span class="button_r">关&nbsp;&nbsp;注</span></dl>
         </li>
@@ -344,12 +344,89 @@
   <!-- 项目介绍 end -->
 
   <!-- 联系我 start -->
-  <main id="contact"></main>
+  <main id="contact">
+    <div>
+      <ul class="title4">
+        <li>CONTACT&nbsp;ME</li>
+        <li><span>我的</span><span>联系方式</span></li>
+        <li></li>
+      </ul>
+      <div class="bottom_msg clearfix">
+        <ul>
+          <li>
+            <dl>
+              <dt class="icon_email">&#xe608;</dt>
+              <dd>Contact&nbsp;By&nbsp;Email</dd>
+              <dd>Email：<a href="mailto:mankeung1011@gmail.com?subject=Hr邮件&body=Hi,%20ManKeung:">mankeung1011@gmail.com</a></dd>
+            </dl>
+          </li>
+          <li>
+            <dl>
+              <dt class="icon_phone">&#xe61b;</dt>
+              <dd>Contact&nbsp;By&nbsp;Phone</dd>
+              <dd>Phone：<a href="tel:15170132937">15170132937</a></dd>
+            </dl>
+          </li>
+          <li>
+            <dl>
+              <dt class="icon_add">&#xe62b;</dt>
+              <dd>Looking&nbsp;For&nbsp;Address</dd>
+              <dd>Address：成都市&nbsp;-&nbsp;双流区&nbsp;-&nbsp;天府大道南段1167号</dd>
+            </dl>
+          </li>
+        </ul>
+        <ul>
+          <form action="#" method="post" onsubmit="return checkFrom()">
+            <p class="form_txt">
+              <input type="text" name="name" id="name" />
+              <label for="name" id="msg-name">Name</label>
+              <span class="error"><i>!</i><i></i></span>
+            </p>
+            <p class="form_txt">
+              <input type="email" name="Email" id="email" />
+              <label for="email" id="msg-email">Email</label>
+              <span class="error"><i>!</i><i></i></span>
+            </p>
+            <p class="form_txt">
+              <input type="text" name="Phone" id="phone" />
+              <label for="phone" id="msg-phone">Mobile&nbsp;number</label>
+              <span class="error"><i>!</i><i></i></span>
+            </p>
+            <p class="form_te">
+              <textarea name="msgtxt" id="msg"></textarea>
+              <label for="msg" id="msg-msg">Message...</label>
+            </p>
+            <p class="form_sub">
+              <input type="button" id="button" value="Send" />
+            </p>
+          </form>
+        </ul>
+      </div>
+      <div class="footer">
+        <ul class="icon_footer clearfix" id="username">
+          <li><a href="javascript:;">&#xe606;</a></li>
+          <li><a href="javascript:;">&#xe61c;</a></li>
+          <li><a href="javascript:;">&#xe605;</a></li>
+          <li><a href="javascript:;">&#xe60c;</a></li>
+          <li><a href="javascript:;">&#xe6a4;</a></li>
+          <li><a href="javascript:;">&#xe609;</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
   <!-- 联系我 end -->
-
-  <!-- 版权 start -->
-  <footer></footer>
-  <!-- 版权 end -->
+  <div class="caveat">
+    <div class="caveat_bg">
+      <ul class="clearfix">
+        <li id="count-down">提示</li>
+        <li id="stop-caveat">X</li>
+      </ul>
+      <ul id="caveat-msg" class="clearfix">
+        <li id="caveat-img"></li>
+        <li><i id="caveat-erro"></i><i id="caveat-txt"></i>信息！</li>
+      </ul>
+    </div>
+  </div>
 </body>
 </html>
   <script src="./scripts/min.js"></script>

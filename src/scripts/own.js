@@ -336,7 +336,7 @@
   let main = $all('main');
   let navHeight = $('header');
   let leftHeight = offset(main[4]).top;
-  let rightHeight = offset(main[5]).top;
+  let rightHeight = offset(main[6]).top;
 
   for(let i=0, len=buttonL.length; i<len; i++){ // 回到我的作品
     on(buttonL[i], 'click', () => {
@@ -591,7 +591,7 @@
 
           dt.innerHTML = title;
           html(dt, title);
-          css(dd, 'backgroundImage', `url(../images/ui/${image})`);
+          css(dd, 'backgroundImage', `url(./images/ui/${image})`);
           css(show, 'display', 'block');
           top = scroll().top;
           // console.log(top);
@@ -671,7 +671,7 @@
   // console.log(dlList[0].children);
 
   function msgImg(img, msg, arr) { // 方法
-    css(img, 'backgroundImage', `url(../images/ui/${arr.url})`);
+    css(img, 'backgroundImage', `url(./images/ui/${arr.url})`);
     msg.children[0].innerHTML = arr.title;
     msg.children[1].innerHTML = arr.desc;
     msg.children[2].innerHTML = arr.do;
@@ -698,4 +698,313 @@
   }
 
   youngYears();
+}
+
+/**
+ * 联系方式
+ */
+
+{
+  let errLis = $all('.error');
+  // 正则
+  let zn = /^[\u4e00-\u9fa5]{2,5}$/; // 匹配中文
+  let us = /^[a-zA-Z\s,']{3,25}$/i; // 英文名字
+  let em = /^\w+[.]{0,1}[a-z0-9_-]+\w+@([a-zA-Z0-9_-])+\.[a-z]{2,4}$/i; // 邮箱
+  let ph = /^1[3-9][0-9]{9}$/; // 手机号码
+  let msgr = /\S{51}/;
+
+  // *** 姓名输入框  start ***
+  let nameInput = $('#name'); // 这里有个坑 如果名字去 name 会有问题 拿到这个标签
+  let msgName = $('#msg-name');
+
+  on(nameInput, 'focus', () => { // 获得焦点
+    hide(msgName);
+    nameInput.select(); // 选择表单
+  });
+
+  nameInput.onblur = () => { // 离开焦点  这里有坑不能用 addEventListener
+    let val = trim(nameInput.value);
+
+    if(val == '') {
+      show(msgName);
+      errLis[0].children[1].innerHTML = '留下你美丽的名字吧！';
+      errLis[0].style.transform = 'scale(1)';
+      setTimeout(() => {
+        errLis[0].style.transform = 'scale(0)';
+      }, 3000);
+
+    }else {
+      nameInput.value = val;
+
+      // 正则判断 名字是否为正确
+      let znR = zn.test(val); // false 表示不是中文
+      let usR = us.test(val); // false 表示不是英文
+
+      if(!znR && !usR) {
+        errLis[0].children[1].innerHTML = '名字输入有误，请再看看(#^.^#)';
+        errLis[0].style.transform = 'scale(1)';
+        setTimeout(() => {
+          errLis[0].style.transform = 'scale(0)';
+        }, 3000);
+
+      }
+
+    }
+  }
+
+
+  // *** 姓名输入框 end ***
+
+  // *** 邮件输入框  start ***
+  let emailInput = $('#email'); // 这里有个坑 如果名字去 name 会有问题 拿到这个标签
+  let msgEmail = $('#msg-email');
+
+  on(emailInput, 'focus', () => { // 获得焦点
+    hide(msgEmail);
+    emailInput.select();
+  });
+
+  emailInput.onblur = () => { // 离开焦点
+    let val = trim(emailInput.value);
+
+    if(val == '') {
+      show(msgEmail);
+      if(val == '') {
+      show(msgName);
+      errLis[1].children[1].innerHTML = '没有邮箱怎么联系呢！';
+      errLis[1].style.transform = 'scale(1)';
+      setTimeout(() => {
+        errLis[1].style.transform = 'scale(0)';
+      }, 3000);
+    }
+    }else {
+      emailInput.value = val;
+
+      // 正则判断
+      if(!em.test(val)) {
+        errLis[1].children[1].innerHTML = '您的邮箱格式有误！';
+        errLis[1].style.transform = 'scale(1)';
+        setTimeout(() => {
+          errLis[1].style.transform = 'scale(0)';
+        }, 3000);
+      }
+    }
+  }
+  // *** 邮件输入框 end ***
+
+
+  // **** 电话输入框 start ***
+  let phoneInput = $('#phone');
+  let msgPhone = $('#msg-phone');
+
+  on(phoneInput, 'focus', () => { // 获得焦点
+    hide(msgPhone);
+    phoneInput.select();
+  });
+
+  phoneInput.onblur = () => { // 离开焦点
+    let val = trim(phoneInput.value);
+
+    if(val == '') {
+      show(msgPhone);
+      errLis[2].children[1].innerHTML = '你的号码对我很重要！';
+      errLis[2].style.transform = 'scale(1)';
+      setTimeout(() => {
+        errLis[2].style.transform = 'scale(0)';
+      }, 3000);
+
+    }else {
+      phoneInput.value = val;
+
+      // 正则
+      if(!ph.test(val)) {
+        errLis[2].children[1].innerHTML = '手机号码输入有误！';
+        errLis[2].style.transform = 'scale(1)';
+        setTimeout(() => {
+        errLis[2].style.transform = 'scale(0)';
+        }, 3000);
+
+      }
+    }
+  }
+  // **** 电话输入框 end ***
+
+  // **** 留言输入框 start ***
+  let msg = $('#msg');
+  let msgMsg = $('#msg-msg');
+
+  on(msg, 'focus', () => { // 获得焦点
+    hide(msgMsg);
+    msg.select();
+  });
+
+  msg.onblur = () => { // 离开焦点
+    let val = trim(msg.value);
+
+    if(val == '') {
+      show(msgMsg);
+      errLis[2].children[1].innerHTML = '就没有什么对我说吗？┭┮﹏┭┮！';
+      errLis[2].style.transform = 'scale(1)';
+      setTimeout(() => {
+        errLis[2].style.transform = 'scale(0)';
+      }, 3000);
+    }else {
+
+      // 正则
+      // 过敏词组
+      let arr = [
+        '你爸', '你祖宗', '妈卖批', '你爷', '草拟', '操你', '你妹', '老二', '色鬼', '傻逼', '狗蛋', '你全家', '哈', '呵', '嘻', '大便', '屎', '儿子', '孙子', '屌丝', '王文强', '智障', '搞', '无节操', '无下限', '尼玛', '草', '艹', '泥马', '法克', '神经', '病', '混蛋', '卧槽', '制杖', '撞壁', '捡币', '撒币', '你妈', '死', '全家', '你娘', '牛逼'
+      ];
+
+      for(let i=0, len=arr.length; i<len; i++) {
+        val= val.replace(arr[i], '***');
+      }
+
+      val = val.replace(/sb|sx|x你妈|x你妹|x你全家|傻b|妈b|s逼|哈p|x|b|fuck/gi, '***');
+
+      msg.value = val;
+
+      if(msgr.test(val)) {
+        errLis[2].children[1].innerHTML = '输入的太多了╮(╯▽╰)╭！';
+        errLis[2].style.transform = 'scale(1)';
+        setTimeout(() => {
+        errLis[2].style.transform = 'scale(0)';
+        }, 3000);
+      }
+    }
+  }
+  // **** 留言输入框 end ***
+
+
+
+
+  // 提交
+  let formTxt = $('form');
+  let button = $('#button');
+  let errorText = ''; // 收集错误信息
+  let errorR = /、$/;
+
+  on(button, 'click', () => {
+
+    // let msgTR = /\S{51}|\S{0}/; // 正则字符 1到50
+    // 得到表单数据
+    let name = formTxt.name.value;
+    let email = formTxt.email.value;
+    let phone = formTxt.phone.value;
+    let msgT = formTxt.msgtxt.value;
+    console.log(`name: ${name}, email: ${email}, phone: ${phone}, msg: ${msgT}。`);
+
+    let znR = zn.test(name); // false 表示不是中文
+    let usR = us.test(name); // false 表示不是英文
+
+    let nameFalg = znR == true ? znR : usR; //  name 错误开关 false
+    let emailFalg = em.test(email); //  email 错误开关 false
+    let phoneFalg = ph.test(phone); //  phone 错误开关 false
+    let msgFalg = msgr.test(msgT); //  phone 错误开关 false
+    msgFalg = msgT == '' ? true : msgFalg;
+
+    let str = ''; // 记录错误信息
+    str += nameFalg == true ? '' : '姓名、';
+    str += emailFalg == true ? '' : '邮箱、';
+    str += phoneFalg == true ? '' : '手机号、';
+    str += msgFalg == true ? '内容、' : '';
+    // str += msgT == '' ? '信息' : '';
+    str = str.replace(/、$/, ''); // 去掉最后一个顿号
+    // console.log(str);
+
+    let focusTxt = str.substr(0, 3);
+    focusTxt = focusTxt.replace(/、$/, ''); // 把、去掉
+    // console.log('第一个是：', focusTxt);
+
+    if(nameFalg && emailFalg && phoneFalg && !msgFalg) {
+
+      formTxt.submit(); // 表单验证成功 提交表单
+
+    } else { // 错误信息处理
+
+      // 选择标签
+      let caveat = $('.caveat'); // 大盒子
+      let caveatBg = $('.caveat_bg'); // 弹出窗
+      let countDown = $('#count-down'); // 关闭倒计时
+      let stopCaveat = $('#stop-caveat'); // 关闭窗口
+      let caveatImg = $('#caveat-img'); // 错误提示背景色  oK #42cf8c error #ffb200 背景图
+      let caveatError = $('#caveat-erro'); // 错误提示前缀
+      let caveatTxt = $('#caveat-txt'); // 哪些地方错了 并设置字体颜色
+      let count = 6; // 五秒后关闭
+      let timer = null; // 定时器
+
+      // 图片 数据渲染
+      css(caveatImg, 'backgroundColor', '#ffb200');
+      css(caveatImg, 'backgroundImage', 'url(./images/erro.png)');
+      html(caveatError, '你还有信息填写错误， 还不能提交，请您再确认一下：');
+      html(caveatTxt, str);
+      css(caveatTxt, 'color', 'red');
+      css(caveat, 'display', 'block');
+      setTimeout(() => {
+        caveatBg.style.transform = 'scale(1)'; // 这里有坑 注意如果没延迟 就看不出效果
+      }, 100);
+      clearInterval(timer);
+      timer = setInterval(() => {
+        count--;
+        html(countDown, `提示：还有(${count}) 秒，自动关闭！`);
+
+        if(count == 0) {
+          clearInterval(timer);
+          setTimeout(() => {
+            caveatBg.style.transform = 'scale(0)';
+            setTimeout(() => {
+              css(caveat, 'display', 'none');
+            }, 500);
+            foucsTo(focusTxt);
+          }, 1000);
+        }
+      }, 1000);
+
+      on(stopCaveat, 'click', () => {
+        caveatBg.style.transform = 'scale(0)';
+        setTimeout(() => {
+          css(caveat, 'display', 'none');
+        }, 500);
+        foucsTo(focusTxt);
+        clearInterval(timer);
+      });
+    }
+
+    function foucsTo(val) {
+      switch(val) {
+      case '姓名':
+        nameInput.focus();
+        break;
+      case '邮箱':
+        emailInput.focus();
+        break;
+      case '手机号':
+        phoneInput.focus();
+        break;
+      default:
+        msg.focus();
+    }
+    }
+  });
+
+  if(isMobile()) {
+    attr(phoneInput, 'type', 'number'); // 手机调数字键盘
+  }
+}
+
+/**
+ * 账号调用
+ */
+
+{
+  let user = $('#username');
+  let qq = user.children[2];
+
+  on(qq, 'click', () => {
+    if(isMobile) {
+      window.location.href="mqqwpa://im/chat?chat_type=wpa&uin=765139572&version=1&src_type=web&web_src=oicqzone.com";
+    }else {
+      window.location.href="tencent://im/chat?chat_type=wpa&uin=765139572&version=1&src_type=web&web_src=oicqzone.com";
+    }
+  });
 }

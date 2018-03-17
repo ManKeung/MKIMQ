@@ -1504,3 +1504,496 @@ header {
     }
   }
 }
+
+/**
+ * 联系方式
+ */
+
+#contact {
+  width: 100%;
+ /*  background: {
+   image: url(../images/pc/bottombg.png);
+   size: 100%;
+   repeat: no-repeat;
+ } */
+
+  div:first-of-type {
+    // width: 1140px;
+    margin: 0 auto;
+    /* padding: {
+      top: 80px;
+      bottom: 40px;
+    } */
+
+    // 类别标题 *********************************************************************************
+    .title4 {
+      color: nth($color, 2);
+
+      li:nth-of-type(1) {
+        background-color: nth($color, 1);
+        font: {
+          size: 20px;
+        }
+        letter-spacing: 1px;
+        line-height: 38px;
+        position: relative;
+        text-align: center;
+
+        width: 160px;
+        height: 40px;
+        margin: 0 auto;
+        @include shadow();
+      }
+
+      li:nth-of-type(1)::after {
+        content: "";
+        position: absolute;
+
+        border: {
+          width: 14px 11px 0 12px;
+          color: nth($color, 1) transparent transparent transparent;
+          style: solid;
+        }
+        bottom: -9px;
+        left: 12px;
+      }
+
+      li:nth-of-type(2) {
+        font: {
+          size: 28px;
+        }
+
+        width: 230px;
+        margin: 0 auto;
+        padding: {
+          top: 8px;
+          bottom: 24px;
+        }
+
+        // border: 1px solid red;
+
+        span {
+          display: inline-block;
+          letter-spacing: 4px;
+          color: nth($color, 2);
+        }
+
+        span:first-of-type {
+          padding-left: 10px;
+        }
+
+        span:last-of-type {
+          font: {
+            weight: 700;
+            size: 30px;
+          }
+
+          padding-left: 20px;
+        }
+      }
+
+      li:last-of-type {
+        width: 200px;
+        height: 1px;
+        background-color: nth($xcolor, 2);
+        margin: 0 auto;
+        position: relative;
+      }
+
+      li:last-of-type::after {
+        content: "";
+        position: absolute;
+        width: 80px;
+        height: 6px;
+        background-color: nth($color, 1);
+        left: 58px;
+        top: -3px;
+        display: inline-block;
+      }
+    }
+    //*******************************************************************************************
+
+    .bottom_msg {
+      width: 100%;
+
+      ul {
+        // width: 560px;
+        background-color: nth($color, 2);
+        @include box();
+        // padding: 30px;
+      }
+
+      ul:first-of-type {
+        float: left;
+        padding: 0;
+
+        li {
+          width: 100%;
+          // height: 200px;
+          @include box();
+          text-align: center;
+          // padding-top: 28px;
+
+          dl {
+            width: 100%;
+
+            dt {
+              width: 100%;
+              color: nth($color, 1);
+              // font: {
+              //   size: 36px;
+              // }
+            }
+
+            // dd {
+            //   height: 40px;
+            // }
+
+            dd:first-of-type {
+              // font: {
+              //   size: 20px;
+              // }
+              color: nth($color, 3);
+            }
+
+            dd:last-of-type {
+              color: nth($xcolor, 1);
+
+              a {
+                color: nth($xcolor, 1);
+              }
+              a:hover {
+                color: nth($color, 1);
+              }
+            }
+          }
+        }
+
+        li:nth-of-type(2) {
+          border-top: 1px solid nth($xcolor, 3);
+          border-bottom: 1px solid nth($xcolor, 3);
+        }
+      }
+
+      ul:last-of-type {
+        float: right;
+
+        form {
+          .form_txt {
+            // display: inline-block;
+            width: 100%;
+            // height: 60px;
+            border: 2px solid nth($color, 1);
+            // margin-bottom: 20px;
+            @include box();
+            // padding: 0 10px;
+            position: relative;
+
+            input {
+              // border: 1px solid red;
+              width: 100%;
+              // height: 60px;
+              // line-height: 24px;
+              // line-height: 60px;
+              // font: {
+              //   size: 16px;
+              // }
+            }
+
+            label {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              // height: 54px;
+              // line-height: 54px;
+              @include box();
+              padding-left: 10px;
+              font: {
+                size: 16px;
+              }
+              color: #777;
+            }
+
+            .error { // 错误提示
+              position: absolute;
+              // display: none; // 用隐藏的哈 显示过后要延迟100ms再执行
+              transform: scale(0);
+              // top: 50px;
+              // left: 30px;
+              border: 1px solid nth($xcolor, 2);
+              background-color: nth($color, 2);
+              z-index: 100;
+              // padding: {
+              //   top: 6px;
+              //   right: 6px;
+              //   left: 32px;
+              //   bottom: 6px;
+              // }
+              border-radius: 4px;
+              @include shadow();
+
+              // 动画
+              @include transition($do:0.5s);
+
+              i:first-of-type {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                background-color: #FFB200;
+                color: nth($color, 2);
+                text-align: center;
+                border-radius: 2px;
+                font: {
+                  size: 12px;
+                  weight: 550;
+                }
+                position: absolute;
+                top: 8px;
+                left: 6px;
+              }
+            }
+            .error::before {
+              display: inline-block;
+              content: "";
+              border-top: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-bottom: 10px solid nth($xcolor, 2);
+              border-left: 10px solid transparent;
+              position: absolute;
+              top: -20px;
+              left: 10px;
+            }
+            .error::after {
+              display: inline-block;
+              content: "";
+              border-top: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-bottom: 10px solid nth($color, 2);
+              border-left: 10px solid transparent;
+              position: absolute;
+              top: -18px;
+              left: 10px;
+            }
+          }
+
+          .form_te {
+            width: 100%;
+            // height: 220px;
+            border: 2px solid nth($color, 1);
+            @include box();
+            // padding: 18px 10px;
+            position: relative;
+
+            textarea {
+              width: 100%;
+              height: 100%;
+
+              font: {
+                size: 16px;
+              }
+            }
+
+            label {
+              position: absolute;
+              // left: 10px;
+              // top: 18px;
+              // width: 100px;
+              // height: 24px;
+              // font: {
+              //   size: 16px;
+              // }
+              color: #777;
+            }
+          }
+
+          .form_sub {
+            width: 100%;
+            // height: 80px;
+            position: relative;
+
+            input {
+              // width: 120px;
+              // height: 50px;
+              background-color: #212322;
+              color: nth($color, 2);
+              // line-height: 50px;
+              text-align: center;
+              font: {
+                size: 16px;
+              }
+
+              position: absolute;
+              bottom: 0;
+              left: 0;
+            }
+
+            input:hover {
+              background-color: nth($color, 1);
+            }
+          }
+        }
+      }
+    }
+
+    .footer {
+      width: 100%;
+
+      ul {
+        // width: 400px;
+        margin: 0 auto;
+
+        li {
+          float: left;
+          // width: 50px;
+          // height: 50px;
+          color: nth($color, 2);
+          text-align: center;
+          // line-height: 50px;
+          // font: {
+          //   size: 20px;
+          // }
+          position: relative;
+          // margin-right: 20px;
+
+          a {
+            color: nth($color, 2);
+          }
+        }
+
+        // li:last-of-type {
+        //   margin-right: 0;
+        // }
+
+        li::after {
+          content: "";
+          display: inline-block;
+          // width: 40px;
+          // height: 40px;
+          position: absolute;
+          // left: 3px;
+          // top: 3px;
+          border: 2px solid nth($color, 2);
+          transform: rotate(45deg);
+          -webkit-transform: rotate(45deg);
+        }
+
+        li:nth-of-type(3) {
+          cursor: pointer;
+        }
+        li:nth-of-type(3):hover:after {
+          border-color: nth($color, 1);
+        }
+        li:nth-of-type(3):hover a {
+          color: nth($color, 1);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * 弹出窗
+ */
+
+.caveat {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.3);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  z-index: 100;
+
+  div {
+    // width: 450px;
+    // height: 200px;
+    position: fixed;
+    // top: 50%;
+    // left: 50%;
+    // margin-top: -100px;
+    // margin-left: -225px;
+    background-color: nth($color, 2);
+    border-radius: 4px;
+    @include shadow();
+    transform: scale(0);
+    @include transition($do:0.5s);
+    // @include box();
+    // padding: 20px;
+
+    ul {
+      width: 100%;
+    }
+
+    ul:first-of-type {
+      background-color: nth($color, 1);
+      // height: 45px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      @include box();
+      // padding: {
+      //   top: 10px;
+      //   bottom: 10px;
+      //   left: 20px;
+      //   right: 20px;
+      // }
+      color: nth($color, 2);
+      li:first-of-type {
+        float: left;
+      }
+
+      li:last-of-type {
+        float: right;
+        cursor: pointer;
+        // width: 100px;
+        // width: 26px;
+        // height: 45px;
+        // margin-top: -10px;
+        text-align: center;
+        @include box();
+        // padding-top: 10px;
+        // padding-left: 15px;
+      }
+    }
+
+    ul:last-of-type {
+      @include box();
+      // padding: {
+      //   top: 50px;
+      //   left: 40px;
+      //   right: 20px;
+      //   bottom: 20px;
+      // }
+
+      li {
+        float: left;
+      }
+
+      li:first-of-type {
+        width: 50px;
+        height: 50px;
+        // background-color: #42cf8c; // 42cf8c
+        background: {
+          // image: url(../images/erro.png);
+          repeat: no-repeat;
+          size: 20px 20px;
+          position: center;
+        }
+        border-radius: 50%;
+        text-align: center;
+        color: nth($color, 2);
+        font: {
+          size: 30px;
+          weight: 550;
+        }
+      }
+
+      // li:last-of-type {
+      //   width: 320px;
+      //   margin-left: 20px;
+      // }
+    }
+  }
+}

@@ -12,7 +12,8 @@
  * 5. ico
  * 6. font
  * 7. 音乐
- * 7. server服务
+ * 8. PHP
+ * 9. server服务
  */
 
 // 在gulpfile中先载入gulp包，因为这个包提供了一些API
@@ -55,7 +56,7 @@ gulp.task('script', () => {
       presets: ['env']
     }))
     .pipe(concat('min.js'))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('./dist/scripts'))
     .pipe(browserSync.reload({
       stream: true
@@ -121,6 +122,15 @@ gulp.task('music', () => {
     }));
 });
 
+// php
+gulp.task('php', () => {
+  return gulp.src('./src/*.php')
+    .pipe(gulp.dest('./dist'))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
+});
+
 // 服务
 const browserSync = require('browser-sync'); // 服务
 
@@ -140,5 +150,6 @@ gulp.task('server', () => {
   gulp.watch('./src/*.ico', ['ico']);
   gulp.watch('./src/font/*.*', ['font']);
   gulp.watch('./src/music/*.*', ['music']);
+  gulp.watch('./src/*.php', ['php']);
 });
 

@@ -8,18 +8,18 @@
 function randomSort(arr, newArr) {
   // 如果原数组arr的length值等于1时，原数组只有一个值，其键值为0
   // 同时将这个值push到新数组newArr
-  if(arr.length == 1) {
+  if (arr.length == 1) {
     newArr.push(arr[0]);
 
     return newArr; // 相当于递归退出
   }
 
   // 在原数组length基础上取出一个随机数
-  var random = Math.ceil(Math.random()*arr.length) - 1;
+  var random = Math.ceil(Math.random() * arr.length) - 1;
   // 将原数组中的随机一个值push到新数组newArr中
   newArr.push(arr[random]);
   // 对应删除原数组arr的对应数组项
-  arr.splice(random,1);
+  arr.splice(random, 1);
 
   return randomSort(arr, newArr);
 }
@@ -75,3 +75,71 @@ function randomSort(arr, newArr) {
   return txt;
 }*/
 /**********************************************************/
+
+/**
+ * 时间戳转时间
+ */
+
+function commonTime(time) { //  注意有时候得到的时间戳要*1000
+  var unixTimestamp = new Date(time);
+
+  return unixTimestamp.toLocaleString();
+}
+
+/**
+ * 字符串加密
+ */
+/*function compileStr(code) {
+  var c = String.fromCharCode(code.charCodeAt(0)+code.length);
+
+  for(var i=1; i<code.leng; i++) {
+    c+=String.fromCharCode(code.charCodeAt(i)+code.charCodeAt(i-1));
+  }
+
+  return escape(c);
+}
+*/
+
+/**
+ * 字符进行解密
+ */
+/*function uncompileStr(code) {
+  code = unescape(code);
+  var c = String.fromCharCode(code.charCodeAt(0)-code.length);
+
+  for(var i=i; i<code.length; i++) {
+    c+=String.fromCharCode(code.charCodeAt(i)-c.charCodeAt(i-1));
+  }
+
+  return c;
+}
+// console.log('phone:' + escape('哈哈哈'));
+// console.log('phone:' + unescape('%u54C8%u54C8%u54C8'));
+console.log('phone:' + compileStr('你好'));
+console.log('phone:' + uncompileStr('%u4F62'));
+*/
+
+function compileStr(code) {
+  var c = String.fromCharCode(code.charCodeAt(0) + code.length);
+
+  for (var i = 1; i < code.length; i++) {
+    c += String.fromCharCode(code.charCodeAt(i) + code.charCodeAt(i - 1));
+  }
+
+  return escape(c);
+}
+
+// console.log(compileStr('15170132937'));
+
+function uncompileStr(code) {
+  code = unescape(code);
+  var c = String.fromCharCode(code.charCodeAt(0) - code.length);
+
+  for (var i = 1; i < code.length; i++) {
+    c += String.fromCharCode(code.charCodeAt(i) - c.charCodeAt(i - 1));
+  }
+
+  return c;
+}
+
+// console.log(uncompileStr('%3Cffhgadeklj'));

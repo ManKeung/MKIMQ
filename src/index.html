@@ -8,15 +8,20 @@
   <link rel="icon" href="./icon.ico" type="x-icon">
   <link rel="shortcut icon" href="./icon.ico" type="x-icon">
   <link rel="stylesheet" href="./styles/reset.css" type="text/css">
+  <link rel="stylesheet" type="text/css" id="ie-style">
+  <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="./styles/ie.css"><![endif]-->
   <link rel="stylesheet" href="./styles/common.css" type="text/css">
   <link rel="stylesheet" href="./styles/phone.css" type="text/css" media="(min-width:320px)">
   <link rel="stylesheet" href="./styles/pad.css" type="text/css" media="(min-width:770px)">
   <link rel="stylesheet" href="./styles/pc.css" type="text/css" media="(min-width:1180px)">
-  <!-- <link rel="stylesheet" href="./styles/pc-w.css" type="text/css" media="(min-width:1200px)"> -->
 </head>
 <body>
+  <div id="ie">
+    <img class="ie_top" src="./images/warn.png">
+    </img>
+  </div>
   <!-- 导航栏 start -->
-  <header>
+  <header id="header">
     <span id="header-span"> <!--为了兼容无滚动条新家-->
     <nav class="clearfix">
       <!-- log -->

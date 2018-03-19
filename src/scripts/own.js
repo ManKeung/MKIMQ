@@ -5,8 +5,77 @@
 'use strict';
 
 /**
+ * 判断ie
+ */
+{
+  function IEVersion() {
+  var userAgent = navigator.userAgent; // 取得浏览器的userAgent字符
+  var isIE = userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1; // 判断是否是IE < 11 浏览器
+  var isEdge = userAgent.indexOf('Edge') > -1 && !isIE; // 判断是否IE的Edge浏览器
+  var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf('rv:11.0') > -1;
+
+  if(isIE) {
+    var reIE = new RegExp('MSIE (\\d+.\\d+);');
+    reIE.test(userAgent);
+    var fIEVersion = parseFloat(RegExp['$1']);
+
+    if(fIEVersion == 7) {
+      return 7;
+    }else if(fIEVersion == 8) {
+      return 8;
+    }else if(fIEVersion == 9) {
+      return 9;
+    }else if(fIEVersion == 10) {
+      return 10;
+    }else {
+      return 6; // IE版本<=6
+    }
+
+  }else if(isEdge) {
+    return 0;
+  }else if(isIE11) {
+    return 11; // IE11
+  }else {
+    return 0; // 不是ie
+  }
+  }
+
+  // let ie = IEVersion();
+  // let userAgent = navigator.userAgent;
+  // console.log(ie);
+  // console.log(userAgent);
+  let ieStyle = document.getElementById('ie-style');
+  let ieImg = document.getElementById('ie');
+  // console.log(ieStyle);
+  if(IEVersion()) {
+    // ieStyle.href = './styles/ie.css';
+    // attr(ieStyle, 'href', './style/ie.css');
+    ieStyle.href = './styles/ie.css';
+    ieImg.style.display = 'block';
+    //
+  }else {
+    ieImg.style.display = 'none';
+  }
+}
+
+/**
  * loading效果
  */
+/*{ // 先不写
+  let imagePC = [
+  'images/pc/bigbg.png',
+  'images/pc/bottombg.png',
+  'images/pc/leftbg.png',
+  'images/pc/me.png',
+  ];
+
+  let imageMobile = [
+  'images/mobile/bigbg.png',
+  'images/mobile/bottombg.png',
+  'images/mobile/leftbg.png',
+  'images/mobile/me.png',
+  ];
+}*/
 
 /**
  * 导航栏部分
@@ -722,6 +791,7 @@
   let em = /^\w+[.]{0,1}[a-z0-9_-]+\w+@([a-zA-Z0-9_-])+\.[a-z]{2,4}$/i; // 邮箱
   let ph = /^1[3-9][0-9]{9}$/; // 手机号码
   let msgr = /\S{51}/;
+  let iconTopBottom = $('.icon_top');
 
   // *** 姓名输入框  start ***
   let nameInput = $('#name'); // 这里有个坑 如果名字去 name 会有问题 拿到这个标签
@@ -730,17 +800,21 @@
   on(nameInput, 'focus', () => { // 获得焦点
     hide(msgName);
     nameInput.select(); // 选择表单
+    css(iconTopBottom, 'display', 'none');
   });
 
   nameInput.onblur = () => { // 离开焦点  这里有坑不能用 addEventListener
     let val = trim(nameInput.value);
+    css(iconTopBottom, 'display', 'block');
 
     if (val == '') {
       show(msgName);
       errLis[0].children[1].innerHTML = '留下你美丽的名字吧！';
       errLis[0].style.transform = 'scale(1)';
+      errLis[0].style.WebkitTransform = 'scale(1)';
       setTimeout(() => {
         errLis[0].style.transform = 'scale(0)';
+        errLis[0].style.WebkitTransform = 'scale(0)';
       }, 3000);
 
     } else {
@@ -753,8 +827,10 @@
       if (!znR && !usR) {
         errLis[0].children[1].innerHTML = '名字输入有误，请再看看(#^.^#)';
         errLis[0].style.transform = 'scale(1)';
+        errLis[0].style.WebkitTransform = 'scale(1)';
         setTimeout(() => {
           errLis[0].style.transform = 'scale(0)';
+          errLis[0].style.WebkitTransform = 'scale(0)';
         }, 3000);
 
       }
@@ -772,10 +848,12 @@
   on(emailInput, 'focus', () => { // 获得焦点
     hide(msgEmail);
     emailInput.select();
+    css(iconTopBottom, 'display', 'none');
   });
 
   emailInput.onblur = () => { // 离开焦点
     let val = trim(emailInput.value);
+    css(iconTopBottom, 'display', 'block');
 
     if (val == '') {
       show(msgEmail);
@@ -783,8 +861,10 @@
         show(msgName);
         errLis[1].children[1].innerHTML = '没有邮箱怎么联系呢！';
         errLis[1].style.transform = 'scale(1)';
+        errLis[1].style.WebkitTransform = 'scale(1)';
         setTimeout(() => {
           errLis[1].style.transform = 'scale(0)';
+          errLis[1].style.WebkitTransform = 'scale(0)';
         }, 3000);
       }
     } else {
@@ -794,8 +874,10 @@
       if (!em.test(val)) {
         errLis[1].children[1].innerHTML = '您的邮箱格式有误！';
         errLis[1].style.transform = 'scale(1)';
+        errLis[1].style.WebkitTransform = 'scale(1)';
         setTimeout(() => {
           errLis[1].style.transform = 'scale(0)';
+          errLis[1].style.WebkitTransform = 'scale(0)';
         }, 3000);
       }
     }
@@ -810,17 +892,21 @@
   on(phoneInput, 'focus', () => { // 获得焦点
     hide(msgPhone);
     phoneInput.select();
+    css(iconTopBottom, 'display', 'none');
   });
 
   phoneInput.onblur = () => { // 离开焦点
     let val = trim(phoneInput.value);
+    css(iconTopBottom, 'display', 'block');
 
     if (val == '') {
       show(msgPhone);
       errLis[2].children[1].innerHTML = '你的号码对我很重要！';
       errLis[2].style.transform = 'scale(1)';
+      errLis[2].style.WebkitTransform = 'scale(1)';
       setTimeout(() => {
         errLis[2].style.transform = 'scale(0)';
+        errLis[2].style.WebkitTransform = 'scale(0)';
       }, 3000);
 
     } else {
@@ -830,8 +916,10 @@
       if (!ph.test(val)) {
         errLis[2].children[1].innerHTML = '手机号码输入有误！';
         errLis[2].style.transform = 'scale(1)';
+        errLis[2].style.WebkitTransform = 'scale(1)';
         setTimeout(() => {
           errLis[2].style.transform = 'scale(0)';
+          errLis[2].style.WebkitTransform = 'scale(0)';
         }, 3000);
 
       }
@@ -846,18 +934,22 @@
   on(msg, 'focus', () => { // 获得焦点
     hide(msgMsg);
     msg.select();
+    css(iconTopBottom, 'display', 'none');
   });
 
   msg.onblur = () => { // 离开焦点
     let val = trim(msg.value);
+    css(iconTopBottom, 'display', 'block');
     val = val.replace(/\n/g, '');
 
     if (val == '') {
       show(msgMsg);
       errLis[2].children[1].innerHTML = '就没有什么对我说吗？┭┮﹏┭┮！';
       errLis[2].style.transform = 'scale(1)';
+      errLis[2].style.WebkitTransform = 'scale(1)';
       setTimeout(() => {
         errLis[2].style.transform = 'scale(0)';
+        errLis[2].style.WebkitTransform = 'scale(0)';
       }, 3000);
     } else {
 
@@ -878,8 +970,10 @@
       if (msgr.test(val)) {
         errLis[2].children[1].innerHTML = '输入的太多了╮(╯▽╰)╭！';
         errLis[2].style.transform = 'scale(1)';
+        errLis[2].style.WebkitTransform = 'scale(1)';
         setTimeout(() => {
           errLis[2].style.transform = 'scale(0)';
+          errLis[2].style.WebkitTransform = 'scale(0)';
         }, 3000);
       }
     }
@@ -973,6 +1067,7 @@
               clearInterval(timer);
               setTimeout(() => {
                 caveatBg.style.transform = 'scale(0)';
+                caveatBg.style.WebkitTransform = 'scale(0)';
                 setTimeout(() => {
                   css(caveat, 'display', 'none');
                 }, 500);
@@ -982,6 +1077,7 @@
 
           on(stopCaveat, 'click', () => {
             caveatBg.style.transform = 'scale(0)';
+            caveatBg.style.WebkitTransform = 'scale(0)';
             setTimeout(() => {
               css(caveat, 'display', 'none');
             }, 500);
@@ -1002,6 +1098,7 @@
           css(caveat, 'display', 'block');
           setTimeout(() => {
             caveatBg.style.transform = 'scale(1)'; // 这里有坑 注意如果没延迟 就看不出效果
+            caveatBg.style.WebkitTransform = 'scale(1)'; // 这里有坑 注意如果没延迟 就看不出效果
           }, 100);
           clearInterval(timer);
           timer = setInterval(() => {
@@ -1012,6 +1109,7 @@
               clearInterval(timer);
               setTimeout(() => {
                 caveatBg.style.transform = 'scale(0)';
+                caveatBg.style.WebkitTransform = 'scale(0)';
                 setTimeout(() => {
                   css(caveat, 'display', 'none');
                 }, 500);
@@ -1021,6 +1119,7 @@
 
           on(stopCaveat, 'click', () => {
             caveatBg.style.transform = 'scale(0)';
+            caveatBg.style.WebkitTransform = 'scale(0)';
             setTimeout(() => {
               css(caveat, 'display', 'none');
             }, 500);
@@ -1055,6 +1154,7 @@
       css(caveat, 'display', 'block');
       setTimeout(() => {
         caveatBg.style.transform = 'scale(1)'; // 这里有坑 注意如果没延迟 就看不出效果
+        caveatBg.style.WebkitTransform = 'scale(1)'; // 这里有坑 注意如果没延迟 就看不出效果
       }, 100);
       clearInterval(timer);
       timer = setInterval(() => {
@@ -1065,6 +1165,7 @@
           clearInterval(timer);
           setTimeout(() => {
             caveatBg.style.transform = 'scale(0)';
+            caveatBg.style.WebkitTransform = 'scale(0)';
             setTimeout(() => {
               css(caveat, 'display', 'none');
             }, 500);
@@ -1075,6 +1176,7 @@
 
       on(stopCaveat, 'click', () => {
         caveatBg.style.transform = 'scale(0)';
+        caveatBg.style.WebkitTransform = 'scale(0)';
         setTimeout(() => {
           css(caveat, 'display', 'none');
         }, 500);
